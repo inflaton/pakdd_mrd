@@ -117,7 +117,7 @@ def split_mass_deferrals(runs_dir, primary, arm):
             continue
         dataset, rows, acceptable = pools[prediction["instance_id"]]
         policy = primary["thresholds"][f"{arm}/{dataset}"]
-        # calibrated probabilities and decision exactly as scripts/sigir/21_evaluate.py and schema.decision_from_probs
+        # calibrated probabilities and decision exactly as scripts/mrd/21_evaluate.py and schema.decision_from_probs
         logits = [math.log(min(max(x, 1e-12), 1.0)) / policy["temperature"] for x in prediction["probs"]]
         top_logit = max(logits)
         weights = [math.exp(x - top_logit) for x in logits]
@@ -313,6 +313,10 @@ def build_tables(runs_dir):
     ):
         raise ValueError("Expanded transfer policies disagree with the fit or confirmation findings")
     confirm_links = [policy["confirm"]["accepted"] for policy in recovered]
+    walmart_pairwise = transfer_replays["walmart_amazon", "lodo_pairwise_clean"]["expanded"]["transfer"]
+    walmart_set = transfer_replays["walmart_amazon", "lodo_set_joint_interv"]["expanded"]["transfer"]
+    if any(row["negative"] or row["correct"] != row["accepted"] for row in (walmart_pairwise, walmart_set)):
+        raise ValueError("Expected only correct scorable Walmart transfer links and no labeled negatives")
 
     diagnostics = load_json(HERE / "policy_diagnostics.json")
     recall_drop = diagnostics["recall_drop"]
@@ -366,6 +370,8 @@ def build_tables(runs_dir):
         "TransferConfirmEmpirical": sum(policy["confirm"]["meets_point_targets"] for policy in recovered),
         "TransferRecoveredLinkingPolicies": sum(policy["transfer"]["accepted"] > 0 for policy in recovered),
         "TransferRecoveredTargetEmpirical": sum(policy["transfer"]["meets_point_targets"] for policy in recovered),
+        "TransferWalmartPairwiseCorrect": walmart_pairwise["correct"],
+        "TransferWalmartSetCorrect": walmart_set["correct"],
         "WdcFitMatchable": wdc_fits["set_joint_clean"]["n_matchable"],
         "WdcInRangeLinks": wdc_fits["set_joint_clean"]["best_in_range"]["correct"],
         "WdcMaxFitLinks": max(row["best"]["correct"] for row in wdc_fits.values() if row["best"]),
@@ -381,6 +387,9 @@ def build_tables(runs_dir):
         "SetLinkableDeferrals": split["deferred"], "SetMultiAcceptableDeferrals": split["multi"],
         "SetSplitMassDeferrals": split["split"], "SetSplitMassDeferralsDblp": split["split_by_dataset"]["dblp_scholar"],
         "SetLostCorrectLinks": recall_drop["lost"], "SetGainedCorrectLinks": recall_drop["gained"],
+        "SetChangedCorrectBothTop": recall_drop["changed_correct_top1_both"],
+        "SetLostAbtBuy": recall_drop["lost_by_dataset"]["abt_buy"],
+        "SetGainedWalmart": recall_drop["gained_by_dataset"]["walmart_amazon"],
         "SetLostToDefer": recall_drop["lost_defer_below_select_only"],
         "UngroupedConfirmCorrect": ungrouped["correct"],
         "GroupedConfirmCorrect": grouped["correct"], "GroupedConfirmMatchable": grouped["matchable"],

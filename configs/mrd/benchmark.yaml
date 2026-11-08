@@ -1,0 +1,27 @@
+# Frozen benchmark construction (plan §5). Freeze BEFORE any teacher calls or method tuning; bump `version`
+# and keep the old manifest if anything changes.
+version: v1
+k: 20                       # candidates presented per instance in the primary task (variable-size; pools may be shorter)
+pool_size: 50               # frozen retrieval pool (supports count interventions 5/10/20/50)
+entity_disjoint_pools: false  # false = shared-catalog, target-entity-held-out (primary); true = stronger entity-disjoint setting (report separately)
+
+splits:
+  seed: 20261101
+  fractions:
+    train: 0.55
+    dev: 0.10
+    calib_fit: 0.08
+    calib_confirm: 0.07
+    test: 0.15
+    transfer: 0.05            # reserved for cross-dataset transfer evaluation; never used for target adaptation
+
+retrieval:
+  retriever: bm25             # bm25 | dense | hybrid (hybrid needs sentence-transformers + GPU)
+  bm25: {k1: 1.2, b: 0.75}
+  dense_model: BAAI/bge-small-en-v1.5
+  rrf: {k: 60}
+  second_config:              # transfer test with a different retriever, thresholds frozen (plan §5)
+    retriever: hybrid
+
+adjudications_dir: data/mrd/public/annotations   # <dataset>.jsonl with two-reviewer pool adjudications
+out_dir: data/mrd/public/benchmark

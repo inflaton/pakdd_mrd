@@ -1,8 +1,0 @@
-# Required screen: same 12B family, minimal decision JSON {"decision": -1 | j}.
-extends: models/judge_12b_rich.yaml
-name: judge_12b_minimal_json
-judge:
-  mode: minimal_json
-  prompt_file: configs/sigir/prompts/judge_minimal_json_v1.txt
-  max_tokens: 24
-  guided: true

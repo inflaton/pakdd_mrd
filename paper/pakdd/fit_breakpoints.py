@@ -9,11 +9,11 @@ from pathlib import Path
 import numpy as np
 
 REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "scripts/sigir"))
+sys.path.insert(0, str(REPO / "scripts/mrd"))
 
 from _common import benchmark_instances
-from sigir.eval.outcomes import is_certified_negative
-from sigir.io import read_decisions
+from mrd.eval.outcomes import is_certified_negative
+from mrd.io import read_decisions
 
 
 DATASETS = ("abt_buy", "dblp_scholar", "walmart_amazon", "wdc_products")
@@ -110,7 +110,7 @@ def replay(pools, prediction_path, policy_path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--benchmark-dir", type=Path, default=REPO / "data/sigir/public/benchmark")
+    parser.add_argument("--benchmark-dir", type=Path, default=REPO / "data/mrd/public/benchmark")
     parser.add_argument("--runs-dir", type=Path, default=REPO / "runs")
     parser.add_argument("--output", type=Path, help="write JSON here instead of stdout")
     args = parser.parse_args()

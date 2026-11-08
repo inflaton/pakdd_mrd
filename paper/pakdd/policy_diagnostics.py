@@ -11,14 +11,14 @@ from statistics import median
 import numpy as np
 
 REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "scripts/sigir"))
+sys.path.insert(0, str(REPO / "scripts/mrd"))
 
 from _common import benchmark_instances
-from sigir.calibration import OperatingPolicy, TemperatureScaler, evaluate_frozen_policy, select_policy
-from sigir.data.duplicates import dblp_probable_duplicate
-from sigir.eval.outcomes import cohort_of, is_certified_negative
-from sigir.io import read_decisions
-from sigir.schema import decision_from_probs
+from mrd.calibration import OperatingPolicy, TemperatureScaler, evaluate_frozen_policy, select_policy
+from mrd.data.duplicates import dblp_probable_duplicate
+from mrd.eval.outcomes import cohort_of, is_certified_negative
+from mrd.io import read_decisions
+from mrd.schema import decision_from_probs
 
 DATASETS = ["abt_buy", "dblp_scholar", "walmart_amazon", "wdc_products"]
 SET_ARMS = ("set_joint_clean_seed0", "set_joint_interv_seed0")
