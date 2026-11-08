@@ -1,0 +1,15 @@
+[
+  {
+    "name": "set_joint_cross[rich_v1]",
+    "concurrency": 1,
+    "n_requests": 600,
+    "warmup": 10,
+    "repeats": 3,
+    "latency_p50_ms": 25.084608991164714,
+    "latency_p95_ms": 61.68028598767705,
+    "wall_s": 17.273022105015116,
+    "mean_power_w": 40.74791666666667,
+    "energy_j_per_query": 1.1730661088610788,
+    "failures": 0
+  }
+]

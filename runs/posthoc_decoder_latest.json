@@ -1,0 +1,33 @@
+{
+  "label": "post hoc: decision-head evaluation after the primary locked comparison",
+  "budget_primary": "0.02",
+  "arms": [
+    "set_joint_interv_seed0",
+    "decoder_head_seed0",
+    "decoder_head_1p5b_interv_seed0",
+    "decoder_head_qwen3_1p7b_off_seed0",
+    "decoder_head_qwen3_1p7b_on_seed0"
+  ],
+  "thinking_on_policies_fixed_before_other_outputs": "runs/20261108T113531Z_calibrate_decoder_head_qwen3_1p7b_on_seed0_fitonly_bea7a1",
+  "calibrations": {
+    "set_joint_interv_seed0": "runs/20261105T142126Z_calibrate_set_joint_interv_seed0_4a8c70",
+    "decoder_head_seed0": "runs/calib/decoder_head_seed0",
+    "decoder_head_1p5b_interv_seed0": "runs/calib/decoder_head_1p5b_interv_seed0",
+    "decoder_head_qwen3_1p7b_off_seed0": "runs/calib/decoder_head_qwen3_1p7b_off_seed0",
+    "decoder_head_qwen3_1p7b_on_seed0": "runs/calib/decoder_head_qwen3_1p7b_on_seed0"
+  },
+  "dev": "runs/20261108T155409Z_posthoc_decoder_dev_dev_1baaf5",
+  "test": {
+    "0.01": "runs/20261108T155418Z_posthoc_test_decoder_b0.01_test_4e089c",
+    "0.02": "runs/20261108T155431Z_posthoc_test_decoder_b0.02_test_10c4fe",
+    "0.05": "runs/20261108T155444Z_posthoc_test_decoder_b0.05_test_d757bf"
+  },
+  "test_contrasts": {
+    "set_joint_interv_seed0 - decoder_head_1p5b_interv_seed0": "runs/20261108T155457Z_posthoc_test_pair_set_joint_interv_seed0_vs_decoder_head_1p5b_interv_seed0_test_e800d9",
+    "set_joint_interv_seed0 - decoder_head_qwen3_1p7b_off_seed0": "runs/20261108T155505Z_posthoc_test_pair_set_joint_interv_seed0_vs_decoder_head_qwen3_1p7b_off_seed0_test_d26c9e",
+    "set_joint_interv_seed0 - decoder_head_qwen3_1p7b_on_seed0": "runs/20261108T155513Z_posthoc_test_pair_set_joint_interv_seed0_vs_decoder_head_qwen3_1p7b_on_seed0_test_35f3d8",
+    "decoder_head_qwen3_1p7b_on_seed0 - decoder_head_qwen3_1p7b_off_seed0": "runs/20261108T155521Z_posthoc_test_pair_decoder_head_qwen3_1p7b_on_seed0_vs_decoder_head_qwen3_1p7b_off_seed0_test_d07ebb",
+    "decoder_head_1p5b_interv_seed0 - decoder_head_seed0": "runs/20261108T155529Z_posthoc_test_pair_decoder_head_1p5b_interv_seed0_vs_decoder_head_seed0_test_d398d5",
+    "decoder_head_qwen3_1p7b_off_seed0 - decoder_head_1p5b_interv_seed0": "runs/20261108T155537Z_posthoc_test_pair_decoder_head_qwen3_1p7b_off_seed0_vs_decoder_head_1p5b_interv_seed0_test_cd3917"
+  }
+}

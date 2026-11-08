@@ -1,0 +1,22 @@
+{
+  "hardware": {
+    "gpu_name": "NVIDIA GB10"
+  },
+  "config": {
+    "config": {
+      "n_items": 200,
+      "warmup": 10,
+      "repeats": 3,
+      "systems": [
+        {
+          "name": "set_joint_cross",
+          "kind": "compact",
+          "checkpoint": "models/mrd/set_joint_interv_seed0/best.pt"
+        }
+      ]
+    },
+    "args": {
+      "partition": "dev"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "config": {
+    "name": "set_joint_base",
+    "model": {
+      "backbone": "microsoft/deberta-v3-base"
+    },
+    "train": {
+      "intervention_training": true,
+      "intervention_families": [
+        "permutation",
+        "add_hard_nonmatch",
+        "duplicate_record",
+        "remove_all_acceptable"
+      ],
+      "p_transform": 0.5,
+      "serialization": "rich_v1"
+    }
+  },
+  "result": {
+    "steps": 3070
+  }
+}

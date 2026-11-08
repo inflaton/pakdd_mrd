@@ -11,7 +11,7 @@ make -C paper/pakdd check
 make -C paper/pakdd numbers
 ```
 
-The first command compares a fresh generation with the checked-in LaTeX tables and macros. The second updates them. Both read the archived scores, policies, and summaries under `runs/` and require only Python's standard library. No source datasets, model downloads, API calls, or GPU are needed. The notebook in `notebooks/08_pakdd_manuscript.ipynb` presents the same numbers and per-cohort comparisons. To run it, install the `notebooks` extra and open the notebook from the `notebooks` directory.
+The first command compares a fresh generation with the checked-in LaTeX tables and macros. The second updates them. Both read archived scores, policies, and summaries and require only Python's standard library. No source datasets, model downloads, API calls, or GPU are needed. The notebook in `notebooks/08_pakdd_manuscript.ipynb` presents the same numbers and per-cohort comparisons. To run it, install the `notebooks` extra and open the notebook from the `notebooks` directory.
 
 ## Rebuild the benchmark and replay policies
 
@@ -26,22 +26,25 @@ python scripts/mrd/03_constructed_cohort.py
 
 The download script obtains the pinned archives from the source maintainers. The benchmark code rebuilds retrieval pools and labels, with released entity links and clusters as the basis for partitioning. The pins and expected pool hashes are under `data/mrd/public/`. The package includes the row-ID membership needed to reproduce the Walmart–Amazon exposure restriction. The scripts rebuild records from the publisher archives. Each dataset remains subject to its original terms.
 
-Run the three policy diagnostics from the repository root after the benchmark build. Use fresh output paths to preserve the reference snapshots.
+Run the policy diagnostics from the repository root after the benchmark build. Use fresh output paths to preserve the reference snapshots.
 
 ```sh
 mkdir -p reproduced
 python paper/pakdd/fit_breakpoints.py --benchmark-dir data/mrd/public/benchmark --output reproduced/fit_breakpoints.json
 python paper/pakdd/policy_diagnostics.py --benchmark-dir data/mrd/public/benchmark --output reproduced/policy_diagnostics.json
 python paper/pakdd/transfer_confirmation.py --benchmark-dir data/mrd/public/benchmark --output reproduced/transfer_confirmation.json
+python paper/pakdd/decoder_diagnostics.py --benchmark-dir data/mrd/public/benchmark --output reproduced/decoder_diagnostics.json
 ```
 
-Replay statistics can be compared with the checked-in diagnostic JSON. Transfer provenance hashes describe the archived inputs and may differ when the released predictions omit ancillary metadata. To re-score the main policy from its archived candidate probabilities:
+Replay statistics can be compared with the checked-in diagnostic JSON. Transfer provenance hashes describe the archived inputs and may differ when the released predictions omit ancillary metadata. The decoder diagnostic replays from extracted candidate symbols, reasoning-token counts, and completion status. The extraction pattern is recorded in the diagnostic script. To re-score the main policy from its archived candidate probabilities:
 
 ```sh
 python scripts/mrd/21_evaluate.py --partition test --cohorts natural,constructed --budget 0.02 \
   --arm set_joint_interv_seed0=runs/preds/set_joint_interv_seed0.jsonl.gz:runs/calib/set_joint_interv_seed0/policies \
   --runs-dir reproduced
 ```
+
+The matched-target replay commands are in `runs/posthoc_matched_risk/README.md`. The archived decoder probabilities and policies are under `runs/preds/` and `runs/calib/`. To replay the decoder decisions, use the evaluator above with the corresponding arm name and archive paths. `runs/posthoc_decoder_latest.json` lists the evaluation and fit records used by the numerical generator. `runs/backbone_models/` contains aggregate training configuration and history excerpts for the backbone comparisons.
 
 ## Train the compact scorers
 

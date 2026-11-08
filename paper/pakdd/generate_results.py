@@ -3,9 +3,11 @@
 
 import argparse
 import gzip
+import hashlib
 import json
 import math
 import statistics
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -39,6 +41,34 @@ TRANSFER_RUNS = {
     "dblp_scholar": "20261107T130722Z_transfer_lodo_dblp_scholar_transfer_96cde1",
     "walmart_amazon": "20261107T130716Z_transfer_lodo_walmart_amazon_transfer_cb9ca8",
     "wdc_products": "20261107T130725Z_transfer_lodo_wdc_products_transfer_53824b",
+}
+# Post hoc decision heads scored after the primary locked comparison.
+POSTHOC_POINTER = "posthoc_decoder_latest.json"
+DECODER_ARMS = (
+    ("decoder_head_seed0", "Qwen2.5-1.5B", "No", "--", "DecoderClean"),
+    ("decoder_head_1p5b_interv_seed0", "Qwen2.5-1.5B", "Yes", "--", "DecoderIntervention"),
+    ("decoder_head_qwen3_1p7b_off_seed0", "Qwen3-1.7B", "Yes", "Off", "QwenOff"),
+    ("decoder_head_qwen3_1p7b_on_seed0", "Qwen3-1.7B", "Yes", "On", "QwenOn"),
+)
+THINKING_PREDICT_RUNS = {
+    "off": ("20261108T095124Z_predict_decoder_head_qwen3_1p7b_off_378ed1",),
+    "on": ("20261108T102623Z_predict_decoder_head_qwen3_1p7b_on_8819c4", "20261108T113452Z_predict_decoder_head_qwen3_1p7b_on_6d10fd"),
+}
+# Nov 4 encoder pilot (set model with interventions, 200 updates, 200 dev pools of the provisional benchmark build)
+# and the batch-1 efficiency bench of the main model on the Spark.
+PILOT_MODELS = {
+    "PilotDeberta": "pilot_deberta-v3-small_seed0_g400",
+    "PilotModernbert": "pilot_ModernBERT-base_seed0_g400",
+    "PilotBge": "pilot_bge-base-en-v1.5_seed0_g400",
+}
+BENCH_RUN = "20261107T004820Z_bench_ced1c0"
+# Nov 8 backbone check (user request after the locked test; queue q11): the main method with DeBERTaV3-base,
+# calibrated with the unchanged procedure and evaluated on dev only; it has no test or transfer predictions.
+BASE_ARM = "set_joint_interv_base_seed0"
+BASE_DEV_RUNS = {
+    0.01: "20261108T192843Z_backbone_base_dev_b0.01_dev_58dbc9",
+    0.02: "20261108T192850Z_backbone_base_dev_b0.02_dev_c08875",
+    0.05: "20261108T192856Z_backbone_base_dev_b0.05_dev_8ab2da",
 }
 DATASETS = {
     "abt_buy": "Abt--Buy",
@@ -75,7 +105,7 @@ def accepted_links(metrics):
     return metrics["CM"] + metrics["WC"] + metrics["SM"]
 
 
-def forced_top_one(runs_dir, expected_count):
+def forced_top_one(runs_dir, expected_count, arms=tuple(arm for arm, *_ in ARMS)):
     """Ignore NONE and thresholds, breaking score ties by candidate row ID. Returns pooled and per-dataset accuracy."""
     matchable = {
         pool["instance_id"]: (pool["dataset"], [c["row_id"] for c in pool["candidates"]], set(pool["acceptable_row_ids"]))
@@ -85,7 +115,7 @@ def forced_top_one(runs_dir, expected_count):
     if len(matchable) != expected_count:
         raise ValueError("Matchable test pools in the archived judge cohort differ from the locked count")
     accuracies, per_dataset = {}, {}
-    for arm, *_ in ARMS:
+    for arm in arms:
         correct, totals = Counter(), Counter()
         seen = set()
         for prediction in read_jsonl_gz(runs_dir / f"preds/{arm}.jsonl.gz"):
@@ -262,7 +292,7 @@ def build_tables(runs_dir):
         values = [pooled[f"{prefix}_seed{seed}"]["match_recall"] for seed in range(3)]
         return rf"\ensuremath{{{percent(statistics.mean(values))}\pm {percent(statistics.stdev(values))}}}\%"
 
-    rows = {name: [] for name in ("main", "dataset", "negative", "comem", "robustness", "transfer")}
+    rows = {name: [] for name in ("main", "dataset", "negative", "comem", "matched_risk", "robustness", "transfer")}
     macros = {}
 
     def define_counts(values):
@@ -303,6 +333,41 @@ def build_tables(runs_dir):
         rows["comem"].append([
             label, prompt, percent(result["match_recall"]), percent(result["precision"]),
             percent(result["n_fmr"], 2), percent(result["false_none_rate"]), percent(result["defer_rate"]),
+        ])
+
+    matched_dir = runs_dir / "posthoc_matched_risk"
+    frozen_bytes = (matched_dir / "frozen_fit.json").read_bytes()
+    matched_fit = json.loads(frozen_bytes)
+    heldout = load_json(matched_dir / "heldout_test.json")
+    if (matched_fit["compact_arm"], heldout["partition"], heldout["frozen_fit_sha256"]) != (
+        SET_ARM, "test", hashlib.sha256(frozen_bytes).hexdigest(),
+    ):
+        raise ValueError("Expected held-out matched-risk results from the archived compact fit")
+    target_labels = {
+        "judge_120b_rich": "GPT-OSS (rich)",
+        "judge_12b_minimal_json": "Gemma (minimal JSON)",
+        "judge_12b_rich": "Gemma (rich)",
+        "judge_12b_symbols": "Gemma (symbols)",
+        "comem": "Adapted ComEM",
+    }
+    for arm, label in target_labels.items():
+        fit = matched_fit["comparisons"][arm]
+        policy, dev = fit["frozen_policy"], fit["dev_metrics"]
+        test = heldout["comparisons"][arm]
+        result, test_baseline = test["ours"], test["baseline"]
+        locked_baseline = baseline if arm == "comem" else pooled[arm]
+        scorable_outcomes = ("n", "n_matchable", "n_certified_nomatch", "CM", "WC", "MM", "SM", "CR")
+        if any(test_baseline[key] != locked_baseline[key] for key in scorable_outcomes):
+            raise ValueError(f"Matched-risk baseline outcomes differ from the locked evaluation for {label}")
+        recall_delta = test["paired_ours_minus_baseline"]["match_recall"]["diff"]
+        if (policy["nfmr_budget"], policy["precision_floor"]) != (dev["n_fmr"], dev["precision"]) or not math.isclose(
+            recall_delta, result["match_recall"] - test_baseline["match_recall"],
+        ):
+            raise ValueError(f"Inconsistent matched-risk targets or recall difference for {label}")
+        rows["matched_risk"].append([
+            label, percent(policy["nfmr_budget"], 2), percent(policy["precision_floor"], 2),
+            percent(result["match_recall"]), percent(result["precision"]), percent(result["n_fmr"], 2),
+            percent(result["defer_rate"]), rf"\ensuremath{{{percent(recall_delta)}}}",
         ])
 
     training = {"No": "Clean", "Yes": "Interventions"}
@@ -491,14 +556,200 @@ def build_tables(runs_dir):
         "DisjointRecallGain": percent(disjoint["paired"]["match_recall"]["diff"]),
         "DisjointRecallCI": interval(disjoint["paired"]["match_recall"]),
     })
+    backbone_macros(runs_dir, macros, define_counts)
+    base_backbone_macros(runs_dir, macros, define_rates)
+    decoder_tables(runs_dir, primary, top_one, rows, macros, define_counts, define_rates, recall_cell)
     rendered = {}
     for name, group in rows.items():
         body = [" & ".join(row) + r" \\" for row in group]
-        if name == "comem":
-            body.insert(-1, r"\midrule")
+        if name in ("comem", "decoder"):
+            body.insert(-1 if name == "comem" else 1, r"\midrule")
         rendered[f"{name}_rows.tex"] = "\n".join([*body, r"\bottomrule", ""])
     rendered["results.tex"] = "".join(rf"\newcommand{{\{key}}}{{{value}}}" + "\n" for key, value in macros.items())
     return rendered
+
+
+def negated(paired):
+    return {"diff": -paired["diff"], "lo": -paired["hi"], "hi": -paired["lo"]}
+
+
+def backbone_macros(runs_dir, macros, define_counts):
+    """Why DeBERTaV3-small: the encoder pilot's argmax F0.5 per backbone, and the main model's batch-1 cost."""
+    models_dir = runs_dir / "backbone_models"
+    steps, pools, scores = set(), set(), {}
+    for prefix, name in PILOT_MODELS.items():
+        config = load_json(models_dir / name / "train_config.json")
+        if config["config"]["name"] != "set_joint" or not config["config"]["train"]["intervention_training"]:
+            raise ValueError(f"Expected the pilot run {name} to train the set model with interventions")
+        best = min(load_json(models_dir / name / "history.json"), key=lambda entry: entry["dev"]["set_nll"])["dev"]
+        steps.add(config["result"]["steps"])
+        pools.add(int(best["n"]))
+        scores[prefix] = best["f05"]
+        macros[f"{prefix}Fhalf"] = f"{best['f05']:.1f}"
+    if len(steps) != 1 or len(pools) != 1 or max(scores, key=scores.get) != "PilotDeberta":
+        raise ValueError("Expected matched pilot runs led by DeBERTaV3-small")
+    define_counts({"PilotSteps": steps.pop(), "PilotDevPools": pools.pop()})
+
+    systems = load_json(runs_dir / BENCH_RUN / "manifest.json")["config"]["config"]["systems"]
+    if next(system for system in systems if system["name"] == "set_joint_cross")["checkpoint"] != f"models/mrd/{SET_ARM}/best.pt":
+        raise ValueError("Expected the efficiency bench to time the main model")
+    row = next(row for row in load_json(runs_dir / BENCH_RUN / "bench.json")
+               if row["name"] == "set_joint_cross[rich_v1]" and row["concurrency"] == 1)
+    macros["BenchLatency"] = f"{row['latency_p50_ms']:.0f}"
+    macros["BenchEnergy"] = f"{row['energy_j_per_query']:.1f}"
+
+
+def base_backbone_macros(runs_dir, macros, define_rates):
+    """Post hoc, dev only: the main method retrained on DeBERTaV3-base. Its calibration fit finds no qualifying
+    threshold pair, so it defers every development pool."""
+    models_dir = runs_dir / "backbone_models"
+    configs = {name: load_json(models_dir / name / "train_config.json") for name in (SET_ARM, BASE_ARM)}
+    backbones = {name: config["config"]["model"]["backbone"] for name, config in configs.items()}
+    if backbones != {SET_ARM: "microsoft/deberta-v3-small", BASE_ARM: "microsoft/deberta-v3-base"}:
+        raise ValueError(f"Unexpected backbones {backbones}")
+    if len({config["result"]["steps"] for config in configs.values()}) != 1:
+        raise ValueError("Expected the DeBERTaV3-base run to match the main model's updates")
+    for name, prefix in ((SET_ARM, "BaseCheckSmall"), (BASE_ARM, "BaseCheckBase")):
+        # the checkpoint each run kept: the epoch with the lowest dev set NLL
+        best = min(load_json(models_dir / name / "history.json"), key=lambda entry: entry["dev"]["set_nll"])["dev"]
+        macros[f"{prefix}Fhalf"] = f"{best['f05']:.1f}"
+    if float(macros["BaseCheckBaseFhalf"]) <= float(macros["BaseCheckSmallFhalf"]):
+        raise ValueError("Expected DeBERTaV3-base to have the higher argmax F0.5 at its kept checkpoint")
+
+    policies = sorted((runs_dir / "calib" / BASE_ARM / "policies").glob("*_nfmr*.json"))
+    if len(policies) != 12 or any(
+        load_json(path)["feasible"] or min(load_json(path)["tau_select"], load_json(path)["tau_none"]) <= 1 for path in policies
+    ):
+        raise ValueError("Expected no qualifying threshold pair in any DeBERTaV3-base scope or target")
+    for budget, run in BASE_DEV_RUNS.items():
+        evaluation = load_json(runs_dir / run / "evaluation.json")
+        if (evaluation["partition"], evaluation["budget"], evaluation["cohorts"]) != ("dev", budget, ["natural", "constructed"]):
+            raise ValueError(f"Expected the {budget} backbone check on dev with both cohorts")
+        if evaluation["results"][BASE_ARM]["defer_rate"] != 1.0:
+            raise ValueError("Expected DeBERTaV3-base to defer every development pool")
+        if budget == 0.02:
+            define_rates({"BaseCheckSmallDevRecall": evaluation["results"][SET_ARM]["match_recall"]})
+            paired = negated(evaluation["paired"]["match_recall"])  # DeBERTaV3-base minus DeBERTaV3-small
+            macros["BaseCheckVsSmallRecall"] = rf"\ensuremath{{{percent(paired['diff'])}}}"
+            macros["BaseCheckVsSmallCI"] = interval(paired)
+
+
+def decoder_tables(runs_dir, primary, top_one, rows, macros, define_counts, define_rates, recall_cell):
+    """Post hoc decision-head arms on the locked test pools: one scoring at the frozen procedure, labelled post hoc.
+    Uses the archived post hoc run pointer."""
+    if not (runs_dir / POSTHOC_POINTER).exists():
+        print(f"note: {POSTHOC_POINTER} not found; the post hoc decision-head table is not generated yet", file=sys.stderr)
+        return
+    pointer = load_json(runs_dir / POSTHOC_POINTER)
+
+    def run_path(entry):
+        # the pointer lists repository-relative run directories ("runs/<run id>")
+        return runs_dir / Path(entry).relative_to("runs")
+
+    if not pointer["label"].startswith("post hoc") or "rescored_after" in pointer:
+        raise ValueError("Expected a single post hoc decision-head scoring")
+    post = load_json(run_path(pointer["test"]["0.02"]) / "evaluation.json")
+    if (post["partition"], post["budget"], post["cohorts"]) != ("test", 0.02, ["natural", "constructed"]):
+        raise ValueError("Expected the post hoc 2% evaluation with both test cohorts")
+    pooled = primary["results"]
+    for arm in (SET_ARM, DECODER_ARMS[0][0]):
+        if any(post["results"][arm][key] != pooled[arm][key] for key in ("n", "CM", "WC", "MM", "SM", "CR")):
+            raise ValueError(f"The post hoc scoring does not reproduce the locked result for {arm}")
+    names = [arm for arm, *_ in DECODER_ARMS]
+    main = post["results"][SET_ARM]
+    decoder_top_one, _ = forced_top_one(runs_dir, int(main["n_matchable"]), names)
+    rows["decoder"] = []
+    heads_top_one = [decoder_top_one[arm] for arm in names]
+    macros["DecoderTopOneRange"] = rf"{percent(min(heads_top_one))}--{percent(max(heads_top_one))}\%"
+    for arm, model, intervention, thinking, prefix in (
+        (SET_ARM, "Set-aware (ours)", "Yes", "--", None), *DECODER_ARMS
+    ):
+        result = post["results"][arm]
+        rows["decoder"].append([
+            model, intervention, thinking, percent((top_one | decoder_top_one)[arm]), percent(result["match_recall"]),
+            percent(result["precision"]), percent(result["n_fmr"], 2), percent(result["defer_rate"]),
+            percent(result["false_none_rate"]),
+            *(recall_cell(post["per_dataset"][arm][dataset], post["thresholds"][f"{arm}/{dataset}"]) for dataset in DATASETS),
+        ])
+        if prefix:
+            define_rates({f"{prefix}Recall": result["match_recall"], f"{prefix}TopOne": decoder_top_one[arm],
+                          f"{prefix}Precision": result["precision"], f"{prefix}FalseNone": result["false_none_rate"]})
+            define_rates({f"{prefix}NFMR": result["n_fmr"]}, digits=2)
+            for dataset, short in (("abt_buy", "Abt"), ("dblp_scholar", "Dblp"), ("walmart_amazon", "Walmart")):
+                define_rates({f"{prefix}{short}Recall": post["per_dataset"][arm][dataset]["match_recall"]})
+
+    def contrast(primary_arm, baseline_arm):
+        paired = load_json(run_path(pointer["test_contrasts"][f"{primary_arm} - {baseline_arm}"]) / "evaluation.json")["paired"]
+        return paired["match_recall"], paired["n_fmr"]
+
+    on, off, dh15i, clean = (arm for arm, *_ in DECODER_ARMS[::-1])
+    # paired recall differences, stated as decision head minus the main model where the main model was the primary arm
+    for key, recall in {
+        "DecoderInterventionVsMain": negated(contrast(SET_ARM, dh15i)[0]),
+        "QwenOffVsMain": negated(contrast(SET_ARM, off)[0]),
+        "QwenOnVsMain": negated(contrast(SET_ARM, on)[0]),
+        "QwenOnVsOff": contrast(on, off)[0],
+        "DecoderInterventionGain": contrast(dh15i, clean)[0],
+        "QwenVsDecoderIntervention": contrast(off, dh15i)[0],
+    }.items():
+        macros[f"{key}Recall"] = rf"\ensuremath{{{percent(recall['diff'])}}}"
+        macros[f"{key}CI"] = interval(recall)
+    macros["QwenOnVsOffNFMRCI"] = interval(contrast(on, off)[1])
+
+    # thinking off at the stricter 1% target, and its confirmation precision at 2% (point estimates)
+    strict = load_json(run_path(pointer["test"]["0.01"]) / "evaluation.json")
+    if strict["results"][SET_ARM]["match_recall"] != main["match_recall"]:
+        raise ValueError("Expected the main model's 1% and 2% policies to coincide on the locked test")
+    define_rates({"QwenOffStrictRecall": strict["results"][off]["match_recall"]})
+    report = load_json(run_path(pointer["calibrations"][off]) / "calibration_report.json")
+    confirm = {dataset: report["policies"][f"{dataset}@0.02"]["confirm"]["metrics"]["precision"]
+               for dataset in ("abt_buy", "dblp_scholar")}
+    if max(confirm.values()) >= 0.98:
+        raise ValueError("Expected thinking-off confirmation precision below 98% in both linking scopes")
+    define_rates({"QwenOffConfirmAbtPrecision": confirm["abt_buy"], "QwenOffConfirmDblpPrecision": confirm["dblp_scholar"]})
+    if post["thresholds"][f"{on}/dblp_scholar"]["tau_select"] != 0.98:
+        raise ValueError("Expected the thinking-on DBLP-Scholar select threshold at the 0.98 grid ceiling")
+
+    steps = {load_json(path)["outputs"]["steps"] for path in runs_dir.glob("*_train_decoder_head_*_seed0_*/manifest.json")}
+    if steps != {1020}:
+        raise ValueError(f"Expected 1,020 updates for every decision head, found {sorted(steps)}")
+    define_counts({"DecoderSteps": 1020})
+
+    diag = load_json(HERE / "decoder_diagnostics.json")
+    if diag["partition"] != "calib_fit" or diag["arms"] != {"off": off, "on": on}:
+        raise ValueError("Expected the calibration-fit decision-head diagnostics for the two thinking modes")
+    by_dataset = diag["by_dataset"]
+    on_rows = [row["on"] for row in by_dataset.values()]
+    test_traces = diag["trace_status"]["test"]
+    walltime = {mode: sum(load_json(runs_dir / run_id / "manifest.json")["timing"]["wall_seconds"] for run_id in run_ids)
+                for mode, run_ids in THINKING_PREDICT_RUNS.items()}
+    pools = {mode: sum(load_json(runs_dir / run_id / "manifest.json")["outputs"]["n"] for run_id in run_ids)
+             for mode, run_ids in THINKING_PREDICT_RUNS.items()}
+    dblp, abt, walmart = (by_dataset[d] for d in ("dblp_scholar", "abt_buy", "walmart_amazon"))
+    define_counts({
+        "ThinkDblpNegatives": dblp["on"]["negatives"],
+        "ThinkDblpFalseLinksOff": dblp["off"]["argmax_link_on_negative"],
+        "ThinkDblpFalseLinksOn": dblp["on"]["argmax_link_on_negative"],
+        "ThinkTestPools": test_traces["pools"], "ThinkTestForced": test_traces["forced"],
+        "ThinkTestMedianTokens": test_traces["median_tokens"], "ThinkBudget": 4096,
+    })
+    define_rates({
+        "ThinkStatesAnswer": sum(r["trace_states_answer"] for r in on_rows) / sum(r["matchable"] for r in on_rows),
+        "ThinkFollowsTrace": sum(r["head_follows_trace"] for r in on_rows) / sum(r["trace_states_answer"] for r in on_rows),
+        # matchable pools whose argmax is an acceptable candidate rather than None (before any threshold)
+        "ThinkDblpArgmaxLinkOff": dblp["off"]["argmax_correct"] / dblp["off"]["matchable"],
+        "ThinkDblpArgmaxLinkOn": dblp["on"]["argmax_correct"] / dblp["on"]["matchable"],
+        "ThinkAbtNoneOff": abt["off"]["argmax_none"] / abt["off"]["matchable"],
+        "ThinkAbtNoneOn": abt["on"]["argmax_none"] / abt["on"]["matchable"],
+        "ThinkWalmartConfOff": walmart["off"]["argmax_correct_conf_ge_0.9"] / walmart["off"]["argmax_correct"],
+        "ThinkWalmartConfOn": walmart["on"]["argmax_correct_conf_ge_0.9"] / walmart["on"]["argmax_correct"],
+    })
+    macros.update({
+        "ThinkTemperatureOff": f"{diag['temperature']['off']['pooled']:.2f}",
+        "ThinkTemperatureOn": f"{diag['temperature']['on']['pooled']:.2f}",
+        "ThinkSecondsOff": f"{walltime['off'] / pools['off']:.2f}",
+        "ThinkSecondsOn": f"{walltime['on'] / pools['on']:.2f}",
+    })
 
 
 def main():

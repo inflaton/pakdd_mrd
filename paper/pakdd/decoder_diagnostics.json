@@ -1,0 +1,148 @@
+{
+  "partition": "calib_fit",
+  "arms": {
+    "off": "decoder_head_qwen3_1p7b_off_seed0",
+    "on": "decoder_head_qwen3_1p7b_on_seed0"
+  },
+  "temperature": {
+    "off": {
+      "pooled": 1.1128021887519952,
+      "abt_buy": 1.0326989653805732,
+      "dblp_scholar": 1.1825267872676444,
+      "walmart_amazon": 1.1298219257199622,
+      "wdc_products": 1.1393190646980322
+    },
+    "on": {
+      "pooled": 2.2728744575655693,
+      "abt_buy": 2.3709135858723718,
+      "dblp_scholar": 2.2006709869071273,
+      "walmart_amazon": 2.16111866759938,
+      "wdc_products": 2.624003059570962
+    }
+  },
+  "by_dataset": {
+    "abt_buy": {
+      "off": {
+        "matchable": 166,
+        "forced_top1": 157,
+        "argmax_none": 3,
+        "argmax_correct": 157,
+        "argmax_correct_conf_ge_0.9": 148,
+        "negatives": 170,
+        "argmax_link_on_negative": 31
+      },
+      "on": {
+        "matchable": 166,
+        "forced_top1": 158,
+        "argmax_none": 22,
+        "trace_states_answer": 161,
+        "head_follows_trace": 158,
+        "argmax_correct": 139,
+        "argmax_correct_conf_ge_0.9": 130,
+        "negatives": 170,
+        "argmax_link_on_negative": 9
+      }
+    },
+    "dblp_scholar": {
+      "off": {
+        "matchable": 195,
+        "forced_top1": 195,
+        "argmax_none": 7,
+        "argmax_correct": 188,
+        "argmax_correct_conf_ge_0.9": 160,
+        "negatives": 209,
+        "argmax_link_on_negative": 11
+      },
+      "on": {
+        "matchable": 195,
+        "forced_top1": 195,
+        "argmax_none": 2,
+        "argmax_correct": 193,
+        "argmax_correct_conf_ge_0.9": 156,
+        "trace_states_answer": 189,
+        "head_follows_trace": 186,
+        "negatives": 209,
+        "argmax_link_on_negative": 34
+      }
+    },
+    "walmart_amazon": {
+      "off": {
+        "matchable": 52,
+        "forced_top1": 51,
+        "argmax_none": 6,
+        "argmax_correct": 45,
+        "argmax_correct_conf_ge_0.9": 26
+      },
+      "on": {
+        "matchable": 52,
+        "forced_top1": 51,
+        "argmax_none": 6,
+        "argmax_correct": 45,
+        "argmax_correct_conf_ge_0.9": 40,
+        "trace_states_answer": 49,
+        "head_follows_trace": 45
+      }
+    },
+    "wdc_products": {
+      "off": {
+        "matchable": 132,
+        "forced_top1": 126,
+        "argmax_none": 6,
+        "argmax_correct": 121,
+        "argmax_correct_conf_ge_0.9": 25,
+        "negatives": 138,
+        "argmax_link_on_negative": 37
+      },
+      "on": {
+        "matchable": 132,
+        "forced_top1": 121,
+        "argmax_none": 12,
+        "argmax_correct": 116,
+        "argmax_correct_conf_ge_0.9": 14,
+        "trace_states_answer": 131,
+        "head_follows_trace": 124,
+        "negatives": 138,
+        "argmax_link_on_negative": 28
+      }
+    }
+  },
+  "trace_status": {
+    "calib_fit": {
+      "closed": 2812,
+      "forced": 11,
+      "skipped": 0,
+      "pools": 2823,
+      "median_tokens": 725,
+      "p90_tokens": 1709,
+      "max_tokens": 4096
+    },
+    "dev": {
+      "closed": 1412,
+      "forced": 17,
+      "skipped": 0,
+      "pools": 1429,
+      "median_tokens": 985,
+      "p90_tokens": 2454,
+      "max_tokens": 4096
+    },
+    "test": {
+      "closed": 2044,
+      "forced": 22,
+      "skipped": 0,
+      "pools": 2066,
+      "median_tokens": 962,
+      "p90_tokens": 2380,
+      "max_tokens": 4096
+    },
+    "calib_confirm": {
+      "closed": 924,
+      "forced": 19,
+      "skipped": 0,
+      "pools": 943,
+      "median_tokens": 1014,
+      "p90_tokens": 2597,
+      "max_tokens": 4096
+    }
+  },
+  "stated_answer_pattern": "\\b(?:answer|choose|select|match(?:es)?|pick)\\b[^.\\n]{0,40}?\\b(NONE|[A-T])\\b"
+}
