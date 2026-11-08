@@ -1,0 +1,18 @@
+# Working research operating points (plan §7). FREEZE before looking at calibration/test outcomes.
+# These are empirical comparison targets, not product requirements or guarantees.
+frozen: true  # set to true (and commit) at the Nov 1-6 freeze; scripts refuse test evaluation while false
+frozen_on: "2026-11-05"
+nfmr_budgets: [0.01, 0.02, 0.05]
+primary_nfmr_budget: 0.02
+accepted_link_precision_floor: 0.98
+min_useful_recall: 0.4  # D3 (PI, Nov 5, option B): weighted NFKC pairwise pooled dev recall at 2 % N-FMR with dev-fitted temperature (0.413, runs/pilot_none_check_pairwise_clean_weighted_T.json), rounded down to 0.05
+non_inferiority_margin_recall: 0.01   # at most 1 pp recall loss at the same risk (plan §12 starting target)
+speed_target_latency_ratio: 2.0       # >= 2x lower median local latency vs the quality-appropriate comparator
+alpha: 0.05
+grid:                         # plan §16 default: 25 x 25 = 625 points (0.50..0.98, step 0.02); was 100 x 100 = 10,000
+  tau_select: {start: 0.50, stop: 0.98, step: 0.02}
+  tau_none:   {start: 0.50, stop: 0.98, step: 0.02}
+confirm_alpha_correction: constraints   # D2 (PI, Nov 5): alpha / 2. The policy is chosen on calib_fit and confirmed once on calib_confirm, so only the two constraints are corrected (plan §7 text had alpha / (2 x 625))
+nfmr_cohorts: [natural, constructed]   # D1 (PI, Nov 5): calibrate on natural + constructed certified negatives; report each cohort separately
+no_negative_policy: pooled             # datasets without certified calib_fit negatives (Walmart-Amazon, D4: no adjudication) use the pooled policy; recall claims only
+bootstrap: {n_boot: 1000, seed: 0}

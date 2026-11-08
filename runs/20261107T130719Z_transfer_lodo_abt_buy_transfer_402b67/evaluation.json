@@ -1,0 +1,516 @@
+{
+  "partition": "transfer",
+  "budget": 0.02,
+  "cohorts": [
+    "natural",
+    "constructed"
+  ],
+  "results": {
+    "lodo_set_joint_interv": {
+      "n": 147.0,
+      "n_matchable": 72.0,
+      "n_certified_nomatch": 75.0,
+      "n_unresolved": 0,
+      "CM": 0,
+      "WC": 0,
+      "MM": 72.0,
+      "SM": 0,
+      "CR": 0,
+      "precision": NaN,
+      "match_recall": 0.0,
+      "n_fmr": 0.0,
+      "f05": NaN,
+      "coverage_auto": 0.0,
+      "coverage_match": 0.0,
+      "coverage_none": 0.0,
+      "false_none_rate": 0.0,
+      "accepted_link_error": NaN,
+      "accepted_link_precision": NaN,
+      "auto_decision_error": NaN,
+      "escalation_rate": 0.0,
+      "defer_rate": 1.0,
+      "failure_rate": 0.0,
+      "set_nll": 0.46151852125943915,
+      "matchability_brier": 0.0996876944470268,
+      "n_scored_prob": 147
+    },
+    "lodo_pairwise_clean": {
+      "n": 147.0,
+      "n_matchable": 72.0,
+      "n_certified_nomatch": 75.0,
+      "n_unresolved": 0,
+      "CM": 0,
+      "WC": 0,
+      "MM": 72.0,
+      "SM": 0,
+      "CR": 0,
+      "precision": NaN,
+      "match_recall": 0.0,
+      "n_fmr": 0.0,
+      "f05": NaN,
+      "coverage_auto": 0.0,
+      "coverage_match": 0.0,
+      "coverage_none": 0.0,
+      "false_none_rate": 0.0,
+      "accepted_link_error": NaN,
+      "accepted_link_precision": NaN,
+      "auto_decision_error": NaN,
+      "escalation_rate": 0.0,
+      "defer_rate": 1.0,
+      "failure_rate": 0.0,
+      "set_nll": 1.4576793516381215,
+      "matchability_brier": 0.3854492511563802,
+      "n_scored_prob": 147
+    }
+  },
+  "per_dataset": {
+    "lodo_set_joint_interv": {
+      "abt_buy": {
+        "n": 147.0,
+        "n_matchable": 72.0,
+        "n_certified_nomatch": 75.0,
+        "n_unresolved": 0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 72.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": 0.0,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "__macro__": {
+        "macro_precision": NaN,
+        "macro_match_recall": 0.0,
+        "macro_n_fmr": 0.0,
+        "macro_f05": NaN,
+        "macro_coverage_auto": 0.0
+      }
+    },
+    "lodo_pairwise_clean": {
+      "abt_buy": {
+        "n": 147.0,
+        "n_matchable": 72.0,
+        "n_certified_nomatch": 75.0,
+        "n_unresolved": 0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 72.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": 0.0,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "__macro__": {
+        "macro_precision": NaN,
+        "macro_match_recall": 0.0,
+        "macro_n_fmr": 0.0,
+        "macro_f05": NaN,
+        "macro_coverage_auto": 0.0
+      }
+    }
+  },
+  "by_cohort": {
+    "lodo_set_joint_interv": {
+      "__all__": {
+        "constructed": {
+          "n": 72.0,
+          "n_matchable": 0.0,
+          "n_certified_nomatch": 72.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": NaN,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": NaN,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        },
+        "natural": {
+          "n": 75.0,
+          "n_matchable": 72.0,
+          "n_certified_nomatch": 3.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 72.0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": 0.0,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": 0.0,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        }
+      },
+      "abt_buy": {
+        "constructed": {
+          "n": 72.0,
+          "n_matchable": 0.0,
+          "n_certified_nomatch": 72.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": NaN,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": NaN,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        },
+        "natural": {
+          "n": 75.0,
+          "n_matchable": 72.0,
+          "n_certified_nomatch": 3.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 72.0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": 0.0,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": 0.0,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        }
+      }
+    },
+    "lodo_pairwise_clean": {
+      "__all__": {
+        "constructed": {
+          "n": 72.0,
+          "n_matchable": 0.0,
+          "n_certified_nomatch": 72.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": NaN,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": NaN,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        },
+        "natural": {
+          "n": 75.0,
+          "n_matchable": 72.0,
+          "n_certified_nomatch": 3.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 72.0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": 0.0,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": 0.0,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        }
+      },
+      "abt_buy": {
+        "constructed": {
+          "n": 72.0,
+          "n_matchable": 0.0,
+          "n_certified_nomatch": 72.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": NaN,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": NaN,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        },
+        "natural": {
+          "n": 75.0,
+          "n_matchable": 72.0,
+          "n_certified_nomatch": 3.0,
+          "n_unresolved": 0,
+          "CM": 0,
+          "WC": 0,
+          "MM": 72.0,
+          "SM": 0,
+          "CR": 0,
+          "precision": NaN,
+          "match_recall": 0.0,
+          "n_fmr": 0.0,
+          "f05": NaN,
+          "coverage_auto": 0.0,
+          "coverage_match": 0.0,
+          "coverage_none": 0.0,
+          "false_none_rate": 0.0,
+          "accepted_link_error": NaN,
+          "accepted_link_precision": NaN,
+          "auto_decision_error": NaN,
+          "escalation_rate": 0.0,
+          "defer_rate": 1.0,
+          "failure_rate": 0.0
+        }
+      }
+    }
+  },
+  "error_categories": {
+    "lodo_set_joint_interv": {},
+    "lodo_pairwise_clean": {}
+  },
+  "family_level_nfmr": {
+    "lodo_set_joint_interv": {
+      "abt_buy/natural": {
+        "n_negatives": 3,
+        "sm": 0,
+        "n_families": 2,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.6315968501359612,
+        "upper_bound_family": 0.776393202250021,
+        "alpha": 0.05
+      },
+      "abt_buy/constructed": {
+        "n_negatives": 72,
+        "sm": 0,
+        "n_families": 34,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.040753686230639914,
+        "upper_bound_family": 0.08433964335062537,
+        "alpha": 0.05
+      }
+    },
+    "lodo_pairwise_clean": {
+      "abt_buy/natural": {
+        "n_negatives": 3,
+        "sm": 0,
+        "n_families": 2,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.6315968501359612,
+        "upper_bound_family": 0.776393202250021,
+        "alpha": 0.05
+      },
+      "abt_buy/constructed": {
+        "n_negatives": 72,
+        "sm": 0,
+        "n_families": 34,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.040753686230639914,
+        "upper_bound_family": 0.08433964335062537,
+        "alpha": 0.05
+      }
+    }
+  },
+  "bootstrap_ci": {
+    "lodo_set_joint_interv": {
+      "match_recall": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 37
+      },
+      "precision": {
+        "point": NaN,
+        "lo": NaN,
+        "hi": NaN,
+        "n_clusters": 37
+      },
+      "n_fmr": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 37
+      },
+      "f05": {
+        "point": NaN,
+        "lo": NaN,
+        "hi": NaN,
+        "n_clusters": 37
+      },
+      "coverage_auto": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 37
+      }
+    },
+    "lodo_pairwise_clean": {
+      "match_recall": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 37
+      },
+      "precision": {
+        "point": NaN,
+        "lo": NaN,
+        "hi": NaN,
+        "n_clusters": 37
+      },
+      "n_fmr": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 37
+      },
+      "f05": {
+        "point": NaN,
+        "lo": NaN,
+        "hi": NaN,
+        "n_clusters": 37
+      },
+      "coverage_auto": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 37
+      }
+    }
+  },
+  "paired": {
+    "match_recall": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n_pairs": 147,
+      "n_clusters": 37
+    },
+    "precision": {
+      "diff": NaN,
+      "lo": NaN,
+      "hi": NaN,
+      "n_pairs": 147,
+      "n_clusters": 37
+    },
+    "n_fmr": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n_pairs": 147,
+      "n_clusters": 37
+    },
+    "f05": {
+      "diff": NaN,
+      "lo": NaN,
+      "hi": NaN,
+      "n_pairs": 147,
+      "n_clusters": 37
+    },
+    "non_inferiority_recall": {
+      "margin": 0.01,
+      "lower_ci_of_diff": 0.0,
+      "non_inferior": true
+    }
+  },
+  "thresholds": {
+    "lodo_set_joint_interv/pooled": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.361066873301427,
+      "path": "runs/20261107T024521Z_calibrate_lodo_abt_buy_set_joint_interv_seed0_89c576/policies/pooled_nfmr0.02.json"
+    },
+    "lodo_pairwise_clean/pooled": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.424877100360402,
+      "path": "runs/20261107T033240Z_calibrate_lodo_abt_buy_pairwise_clean_seed0_3aae5f/policies/pooled_nfmr0.02.json"
+    }
+  },
+  "n_instances": 147
+}

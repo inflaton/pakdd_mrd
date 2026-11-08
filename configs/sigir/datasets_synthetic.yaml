@@ -1,0 +1,14 @@
+# Synthetic two-table product benchmark for CPU smoke tests and CI. No downloads.
+raw_dir: data/sigir/public/raw
+pins_dir: data/sigir/public/_pins
+datasets:
+  - name: synth_products
+    format: synthetic
+    synthetic: {n_entities: 1200, n_a: 1000, n_b: 1500, unmatched_frac: 0.3, seed: 7}
+    fields: [title, brand, modelno, price]
+    compact_fields: [title, brand]
+    link_completeness: complete
+    identity_policy: "Same brand and model number is the same product; different model number is a different product."
+    redistribution: "synthetic; freely redistributable"
+    directions: ["A->B", "B->A"]
+    direction_weights: {"A->B": 1.0, "B->A": 0.5}

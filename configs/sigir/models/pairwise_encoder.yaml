@@ -1,0 +1,29 @@
+# Required arm: compact pairwise encoder with rejection (strong simple discriminative baseline).
+name: pairwise_cross
+kind: compact
+model:
+  backbone: microsoft/deberta-v3-small     # pilot alternatives: answerdotai/ModernBERT-base, BAAI/bge-base-en-v1.5, microsoft/deberta-v3-base
+  encoder_mode: cross
+  set_attention: false
+  formulation: joint
+  use_retrieval_features: true
+  max_len: 256
+  attn_implementation: sdpa
+  # Exact weights per backbone (pilot, 4 Nov 2026). deberta-v3-small: the official pytorch_model.bin at the main
+  # commit; the hub's safetensors is a bot conversion on refs/pr/4 (identical hidden states in the 4 Nov check).
+  backbone_pins:
+    microsoft/deberta-v3-small: {revision: a36c739020e01763fe789b4b85e2df55d6180012, use_safetensors: false}
+train:
+  epochs: 3
+  batch_size: 8          # queries per batch; cross mode encodes batch_size x K pairs
+  grad_accum: 1
+  lr: 2.0e-5
+  head_lr: 1.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.06
+  precision: bf16
+  max_steps: null        # set to match the set model's optimizer steps for matched-budget comparisons
+  serialization: rich_v1
+  intervention_training: false
+predict:
+  batch_size: 16

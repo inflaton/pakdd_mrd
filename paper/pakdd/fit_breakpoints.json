@@ -1,0 +1,237 @@
+{
+  "partition": "calib_fit",
+  "budget": 0.02,
+  "precision_floor": 0.98,
+  "wdc": {
+    "pairwise_clean": {
+      "n_matchable": 132,
+      "n_negative": 138,
+      "temperature": 2.380866020762153,
+      "frozen_tau_select": 1.1,
+      "grid_max_precision": 0.8356164383561644,
+      "best": {
+        "threshold": 0.9911830662392712,
+        "accepted": 2,
+        "correct": 2,
+        "spurious": 0,
+        "recall": 0.015151515151515152,
+        "precision": 1.0,
+        "nfmr": 0.0
+      },
+      "best_in_range": null
+    },
+    "pairwise_interv": {
+      "n_matchable": 132,
+      "n_negative": 138,
+      "temperature": 1.429590252747536,
+      "frozen_tau_select": 1.1,
+      "grid_max_precision": 0.8297872340425532,
+      "best": {
+        "threshold": 0.9986677720818629,
+        "accepted": 4,
+        "correct": 4,
+        "spurious": 0,
+        "recall": 0.030303030303030304,
+        "precision": 1.0,
+        "nfmr": 0.0
+      },
+      "best_in_range": null
+    },
+    "set_joint_clean": {
+      "n_matchable": 132,
+      "n_negative": 138,
+      "temperature": 3.6404159833767746,
+      "frozen_tau_select": 1.1,
+      "grid_max_precision": 0.85,
+      "best": {
+        "threshold": 0.9383533482755329,
+        "accepted": 1,
+        "correct": 1,
+        "spurious": 0,
+        "recall": 0.007575757575757576,
+        "precision": 1.0,
+        "nfmr": 0.0
+      },
+      "best_in_range": {
+        "threshold": 0.9383533482755329,
+        "accepted": 1,
+        "correct": 1,
+        "spurious": 0,
+        "recall": 0.007575757575757576,
+        "precision": 1.0,
+        "nfmr": 0.0
+      }
+    },
+    "set_joint_interv": {
+      "n_matchable": 132,
+      "n_negative": 138,
+      "temperature": 1.6370547819988133,
+      "frozen_tau_select": 1.1,
+      "grid_max_precision": 0.7230769230769231,
+      "best": {
+        "threshold": 0.9934556489492464,
+        "accepted": 4,
+        "correct": 4,
+        "spurious": 0,
+        "recall": 0.030303030303030304,
+        "precision": 1.0,
+        "nfmr": 0.0
+      },
+      "best_in_range": null
+    }
+  },
+  "transfer": {
+    "abt_buy": {
+      "pairwise_clean": {
+        "n_matchable": 379,
+        "n_negative": 347,
+        "temperature": 1.424877100360402,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9290780141843972,
+        "best": {
+          "threshold": 0.9985578676360249,
+          "accepted": 88,
+          "correct": 87,
+          "spurious": 1,
+          "recall": 0.22955145118733508,
+          "precision": 0.9886363636363636,
+          "nfmr": 0.002881844380403458
+        },
+        "best_in_range": null
+      },
+      "set_joint_interv": {
+        "n_matchable": 379,
+        "n_negative": 347,
+        "temperature": 1.361066873301427,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9795918367346939,
+        "best": {
+          "threshold": 0.986545468664634,
+          "accepted": 136,
+          "correct": 134,
+          "spurious": 2,
+          "recall": 0.35356200527704484,
+          "precision": 0.9852941176470589,
+          "nfmr": 0.005763688760806916
+        },
+        "best_in_range": null
+      }
+    },
+    "dblp_scholar": {
+      "pairwise_clean": {
+        "n_matchable": 350,
+        "n_negative": 308,
+        "temperature": 1.8432665055229664,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9318181818181818,
+        "best": {
+          "threshold": 0.9997968120636943,
+          "accepted": 14,
+          "correct": 14,
+          "spurious": 0,
+          "recall": 0.04,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "best_in_range": null
+      },
+      "set_joint_interv": {
+        "n_matchable": 350,
+        "n_negative": 308,
+        "temperature": 1.6132187743632573,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9375,
+        "best": {
+          "threshold": 0.9994064914471434,
+          "accepted": 66,
+          "correct": 65,
+          "spurious": 1,
+          "recall": 0.18571428571428572,
+          "precision": 0.9848484848484849,
+          "nfmr": 0.003246753246753247
+        },
+        "best_in_range": null
+      }
+    },
+    "walmart_amazon": {
+      "pairwise_clean": {
+        "n_matchable": 493,
+        "n_negative": 517,
+        "temperature": 1.4993879175450977,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9565217391304348,
+        "best": {
+          "threshold": 0.9996990236721685,
+          "accepted": 51,
+          "correct": 50,
+          "spurious": 1,
+          "recall": 0.10141987829614604,
+          "precision": 0.9803921568627451,
+          "nfmr": 0.0019342359767891683
+        },
+        "best_in_range": null
+      },
+      "set_joint_interv": {
+        "n_matchable": 493,
+        "n_negative": 517,
+        "temperature": 1.7624829555990573,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.968,
+        "best": {
+          "threshold": 0.9911914827290361,
+          "accepted": 223,
+          "correct": 219,
+          "spurious": 4,
+          "recall": 0.44421906693711966,
+          "precision": 0.9820627802690582,
+          "nfmr": 0.007736943907156673
+        },
+        "best_in_range": null
+      }
+    },
+    "wdc_products": {
+      "pairwise_clean": {
+        "n_matchable": 413,
+        "n_negative": 379,
+        "temperature": 1.324021347556578,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9523809523809523,
+        "best": {
+          "threshold": 0.9978926740810709,
+          "accepted": 175,
+          "correct": 172,
+          "spurious": 3,
+          "recall": 0.41646489104116224,
+          "precision": 0.9828571428571429,
+          "nfmr": 0.0079155672823219
+        },
+        "best_in_range": null
+      },
+      "set_joint_interv": {
+        "n_matchable": 413,
+        "n_negative": 379,
+        "temperature": 1.3762506395452994,
+        "frozen_tau_select": 0.98,
+        "grid_max_precision": 0.9840637450199203,
+        "best": {
+          "threshold": 0.9679287440931479,
+          "accepted": 270,
+          "correct": 265,
+          "spurious": 5,
+          "recall": 0.6416464891041163,
+          "precision": 0.9814814814814815,
+          "nfmr": 0.013192612137203167
+        },
+        "best_in_range": {
+          "threshold": 0.9679287440931479,
+          "accepted": 270,
+          "correct": 265,
+          "spurious": 5,
+          "recall": 0.6416464891041163,
+          "precision": 0.9814814814814815,
+          "nfmr": 0.013192612137203167
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Required ablation: factorized matchability (a = P(some acceptable); P(j) = a r_j; P(NONE) = 1 - a).
+extends: models/set_model_joint.yaml
+name: set_factorized
+model:
+  formulation: factorized

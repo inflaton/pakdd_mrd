@@ -1,0 +1,11 @@
+Decide whether one candidate record is the same entity as the query record.
+
+Identity policy: {policy}
+
+Query: {query}
+
+Candidates (each line shows [index] and its symbol):
+{candidates}
+
+Answer with exactly one symbol: the candidate's symbol, or {none_symbol} if no candidate matches.
+Answer:

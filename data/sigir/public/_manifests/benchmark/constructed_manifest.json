@@ -1,0 +1,94 @@
+{
+  "partitions": [
+    "calib_confirm",
+    "calib_fit",
+    "dev",
+    "test",
+    "transfer"
+  ],
+  "datasets": {
+    "abt_buy": {
+      "n_instances": 954,
+      "by_partition": {
+        "calib_confirm": 152,
+        "calib_fit": 166,
+        "dev": 191,
+        "test": 373,
+        "transfer": 72
+      },
+      "k_short": 4,
+      "instances_hash": "3ee7b2354954fb5ae36d597d81b19a7b0c3958387af9dfd87d908fcd40c5cdfe",
+      "removed_acceptable_hist": {
+        "1": 943,
+        "2": 11
+      },
+      "with_probable_duplicates_removed": {},
+      "natural_negatives_screened": {},
+      "label_screen_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dblp_scholar": {
+      "n_instances": 1123,
+      "by_partition": {
+        "calib_confirm": 182,
+        "calib_fit": 195,
+        "dev": 246,
+        "test": 385,
+        "transfer": 115
+      },
+      "k_short": 9,
+      "instances_hash": "5727c1574fe53089d281ceb77d7542240850dd1e8cdff45b118c8762f34dd0cd",
+      "removed_acceptable_hist": {
+        "1": 543,
+        "2": 256,
+        "3": 140,
+        "4": 71,
+        "5": 46,
+        "6": 24,
+        "7": 13,
+        "8": 10,
+        "9": 4,
+        "10": 8,
+        "11": 2,
+        "12": 2,
+        "13": 2,
+        "15": 1,
+        "16": 1
+      },
+      "with_probable_duplicates_removed": {
+        "calib_confirm": 17,
+        "calib_fit": 11,
+        "dev": 16,
+        "test": 22,
+        "transfer": 4
+      },
+      "natural_negatives_screened": {
+        "calib_confirm": 2,
+        "dev": 2,
+        "test": 1
+      },
+      "label_screen_hash": "a5d479bb2dfafb19fb712d53d798a19e921c6b0c98789fa02e629ca5c82f458c"
+    },
+    "wdc_products": {
+      "n_instances": 602,
+      "by_partition": {
+        "calib_confirm": 94,
+        "calib_fit": 132,
+        "dev": 144,
+        "test": 171,
+        "transfer": 61
+      },
+      "k_short": 0,
+      "instances_hash": "a1c949970bb24befad8dc0cf43a97a33c5a744bf08b2527065e4fe3002f41713",
+      "removed_acceptable_hist": {
+        "1": 134,
+        "2": 195,
+        "3": 166,
+        "4": 94,
+        "5": 13
+      },
+      "with_probable_duplicates_removed": {},
+      "natural_negatives_screened": {},
+      "label_screen_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

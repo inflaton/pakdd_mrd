@@ -1,0 +1,7 @@
+# Efficiency experiment: bi-encoder variant whose candidate encodings can be cached (plan §9).
+extends: models/set_model_joint.yaml
+name: set_joint_bi
+model:
+  encoder_mode: bi
+  backbone: BAAI/bge-small-en-v1.5
+  max_len: 256

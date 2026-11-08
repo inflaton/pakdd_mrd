@@ -1,0 +1,53 @@
+{
+  "tau_select": 1.1,
+  "tau_none": 1.1,
+  "nfmr_budget": 0.05,
+  "precision_floor": 0.98,
+  "min_recall": 0.4,
+  "temperature": 1.429590252747536,
+  "fit_metrics": {
+    "n": 270.0,
+    "n_matchable": 132.0,
+    "n_certified_nomatch": 138.0,
+    "n_unresolved": 0,
+    "CM": 0,
+    "WC": 0,
+    "MM": 132.0,
+    "SM": 0,
+    "CR": 0,
+    "precision": NaN,
+    "match_recall": 0.0,
+    "n_fmr": 0.0,
+    "f05": NaN,
+    "coverage_auto": 0.0,
+    "coverage_match": 0.0,
+    "coverage_none": 0.0,
+    "false_none_rate": 0.0,
+    "accepted_link_error": NaN,
+    "accepted_link_precision": NaN,
+    "auto_decision_error": NaN,
+    "escalation_rate": 0.0,
+    "defer_rate": 1.0,
+    "failure_rate": 0.0
+  },
+  "grid": {
+    "n_points": 625,
+    "tau_select": [
+      0.5,
+      0.98,
+      25
+    ],
+    "tau_none": [
+      0.5,
+      0.98,
+      25
+    ]
+  },
+  "feasible": false,
+  "provenance": {
+    "decisions": "runs/preds/pairwise_interv_seed0.jsonl",
+    "scope": "wdc_products",
+    "op_config_hash": "4c56671ea1fe45e448119d0570cec0e9feb063ff42b4953d68b523923510d340",
+    "n_fit": 270
+  }
+}

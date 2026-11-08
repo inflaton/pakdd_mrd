@@ -1,0 +1,14 @@
+# Main method: matched compact set model with NONE (joint softmax). Same encoder, labels and budget as pairwise.
+extends: models/pairwise_encoder.yaml
+name: set_joint
+model:
+  set_attention: true
+  n_set_layers: 2
+  n_set_heads: 8
+  set_dropout: 0.1
+  formulation: joint
+train:
+  intervention_training: true   # the proposed training recipe; the clean-only control sets this false
+  intervention_families: [permutation, add_hard_nonmatch, duplicate_record, remove_all_acceptable]
+  p_transform: 0.5
+  ablate_label_changing: false  # true drops remove_all_acceptable (the label-changing family)

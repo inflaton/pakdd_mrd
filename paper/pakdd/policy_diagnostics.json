@@ -1,0 +1,97 @@
+{
+  "recall_drop": {
+    "matchable": 1095,
+    "clean_correct": 576,
+    "interv_correct": 497,
+    "clean_top1": 1045,
+    "interv_top1": 1043,
+    "lost": 141,
+    "gained": 62,
+    "changed_correct_top1_both": 203,
+    "lost_defer": 139,
+    "lost_none": 2,
+    "lost_defer_below_select_only": 139,
+    "lost_by_dataset": {
+      "abt_buy": 99,
+      "dblp_scholar": 42
+    },
+    "gained_by_dataset": {
+      "abt_buy": 5,
+      "dblp_scholar": 15,
+      "walmart_amazon": 42
+    }
+  },
+  "grouping": {
+    "ungrouped": {
+      "tau_select": 0.92,
+      "tau_none": 0.5,
+      "fit": {
+        "matchable": 195,
+        "negatives": 209,
+        "correct": 135,
+        "accepted": 136,
+        "false_links": 1,
+        "families": 204,
+        "affected_families": 1,
+        "upper_link_error": 0.04028598437824808,
+        "upper_family": 0.02700790299789123
+      },
+      "confirm": {
+        "matchable": 182,
+        "negatives": 196,
+        "correct": 125,
+        "accepted": 125,
+        "false_links": 0,
+        "families": 186,
+        "affected_families": 0,
+        "upper_link_error": 0.02907983713643152,
+        "upper_family": 0.01963731126397706
+      }
+    },
+    "grouped": {
+      "tau_select": 0.86,
+      "tau_none": 0.5,
+      "fit": {
+        "matchable": 195,
+        "negatives": 209,
+        "correct": 165,
+        "accepted": 168,
+        "false_links": 3,
+        "families": 204,
+        "affected_families": 3,
+        "upper_link_error": 0.051297069601533275,
+        "upper_family": 0.042373060407709405
+      },
+      "confirm": {
+        "matchable": 182,
+        "negatives": 196,
+        "correct": 154,
+        "accepted": 155,
+        "false_links": 1,
+        "families": 186,
+        "affected_families": 1,
+        "upper_link_error": 0.03542043483635342,
+        "upper_family": 0.0295895233369342
+      }
+    }
+  },
+  "backfill": {
+    "paired": {
+      "pools": 929,
+      "relative_score_shifts": 756,
+      "rank_shifts": 928
+    },
+    "dblp_scholar": {
+      "natural_count": 30,
+      "natural_median_tail": 0.6319834188898783,
+      "constructed_count": 385,
+      "constructed_median_tail": 0.5530642978855441
+    },
+    "wdc_products": {
+      "natural_count": 12,
+      "natural_median_tail": 0.542398652835699,
+      "constructed_count": 171,
+      "constructed_median_tail": 0.3786330472911553
+    }
+  }
+}

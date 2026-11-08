@@ -1,0 +1,12 @@
+# Required arm: local 120B reference judge (openai/gpt-oss-120b, MXFP4 ~61 GB fits DGX Spark unified memory).
+extends: models/judge_12b_rich.yaml
+name: judge_120b_rich
+judge:
+  base_url: http://localhost:8001/v1
+  model: openai/gpt-oss-120b
+  max_tokens: 4096     # reasoning (analysis channel) + final JSON; the final answer is parsed from `content`
+  timeout_s: 900
+  concurrency: 16
+  extra_body:
+    chat_template_kwargs: null      # Gemma's enable_thinking does not apply
+    reasoning_effort: medium        # gpt-oss default effort, pinned explicitly

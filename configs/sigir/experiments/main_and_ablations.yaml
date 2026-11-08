@@ -1,0 +1,14 @@
+# Core development arms for H1/H2 (plan §3, §6, §8). Matched examples, labels and optimizer steps.
+name: main_and_ablations
+screen_seed: 0
+final_seeds: [0, 1, 2]           # three seeds for the final method and the principal trainable comparator
+arms:
+  set_joint_clean:        {config: models/set_model_joint.yaml,       overrides: ["train.intervention_training=false"]}
+  set_joint_interv:       {config: models/set_model_joint.yaml,       overrides: []}
+  set_joint_interv_nolbl: {config: models/set_model_joint.yaml,       overrides: ["train.ablate_label_changing=true"]}
+  set_factorized_interv:  {config: models/set_model_factorized.yaml,  overrides: []}
+  pairwise_clean:         {config: models/pairwise_encoder.yaml,      overrides: []}
+  pairwise_interv:        {config: models/pairwise_encoder.yaml,      overrides: ["train.intervention_training=true"]}
+matched_steps: auto               # auto = number of optimizer steps of set_joint_interv at the full training size
+learning_curve_sizes: [250, 500, 1000, 2000, 5000, all]   # independent training groups
+variants_per_group: [1, 3]        # vary variants per group separately from number of groups

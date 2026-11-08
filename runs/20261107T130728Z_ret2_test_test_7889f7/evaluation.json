@@ -1,0 +1,704 @@
+{
+  "partition": "test",
+  "budget": 0.02,
+  "cohorts": [
+    "natural"
+  ],
+  "results": {
+    "set_joint_interv_seed0": {
+      "n": 1137.0,
+      "n_matchable": 1101.0,
+      "n_certified_nomatch": 36.0,
+      "n_unresolved": 3398.0,
+      "CM": 393.0,
+      "WC": 0,
+      "MM": 708.0,
+      "SM": 0,
+      "CR": 30.0,
+      "precision": 1.0,
+      "match_recall": 0.3569482288828338,
+      "n_fmr": 0.0,
+      "f05": 73.51290684624018,
+      "coverage_auto": 0.3720316622691293,
+      "coverage_match": 0.34564643799472294,
+      "coverage_none": 0.026385224274406333,
+      "false_none_rate": 0.06448683015440508,
+      "accepted_link_error": 0.0,
+      "accepted_link_precision": 1.0,
+      "auto_decision_error": 0.1437246963562753,
+      "escalation_rate": 0.0,
+      "defer_rate": 0.565523306948109,
+      "failure_rate": 0.0,
+      "set_nll": 0.11059405008247997,
+      "matchability_brier": 0.017923861259198363,
+      "n_scored_prob": 4535
+    },
+    "pairwise_clean_seed0": {
+      "n": 1137.0,
+      "n_matchable": 1101.0,
+      "n_certified_nomatch": 36.0,
+      "n_unresolved": 3398.0,
+      "CM": 94.0,
+      "WC": 0,
+      "MM": 1007.0,
+      "SM": 0,
+      "CR": 0,
+      "precision": 1.0,
+      "match_recall": 0.08537693006357856,
+      "n_fmr": 0.0,
+      "f05": 31.821259309410966,
+      "coverage_auto": 0.08267370272647317,
+      "coverage_match": 0.08267370272647317,
+      "coverage_none": 0.0,
+      "false_none_rate": 0.0,
+      "accepted_link_error": 0.0,
+      "accepted_link_precision": 1.0,
+      "auto_decision_error": 0.0,
+      "escalation_rate": 0.0,
+      "defer_rate": 0.9173262972735268,
+      "failure_rate": 0.0,
+      "set_nll": 0.12411754397705986,
+      "matchability_brier": 0.015868653072065628,
+      "n_scored_prob": 4535
+    },
+    "set_joint_clean_seed0": {
+      "n": 1137.0,
+      "n_matchable": 1101.0,
+      "n_certified_nomatch": 36.0,
+      "n_unresolved": 3398.0,
+      "CM": 542.0,
+      "WC": 0,
+      "MM": 559.0,
+      "SM": 0,
+      "CR": 29.0,
+      "precision": 1.0,
+      "match_recall": 0.49227974568574023,
+      "n_fmr": 0.0,
+      "f05": 82.8999694096054,
+      "coverage_auto": 0.5021987686895338,
+      "coverage_match": 0.4766930518909411,
+      "coverage_none": 0.025505716798592787,
+      "false_none_rate": 0.0036330608537693005,
+      "accepted_link_error": 0.0,
+      "accepted_link_precision": 1.0,
+      "auto_decision_error": 0.006956521739130435,
+      "escalation_rate": 0.0,
+      "defer_rate": 0.49428320140721194,
+      "failure_rate": 0.0,
+      "set_nll": 0.144599340402994,
+      "matchability_brier": 0.015979386835846907,
+      "n_scored_prob": 4535
+    }
+  },
+  "per_dataset": {
+    "set_joint_interv_seed0": {
+      "abt_buy": {
+        "n": 373.0,
+        "n_matchable": 373.0,
+        "n_certified_nomatch": 0.0,
+        "n_unresolved": 0,
+        "CM": 129.0,
+        "WC": 0,
+        "MM": 244.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": 1.0,
+        "match_recall": 0.34584450402144773,
+        "n_fmr": NaN,
+        "f05": 72.55343082114736,
+        "coverage_auto": 0.34584450402144773,
+        "coverage_match": 0.34584450402144773,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": 0.0,
+        "accepted_link_precision": 1.0,
+        "auto_decision_error": 0.0,
+        "escalation_rate": 0.0,
+        "defer_rate": 0.6541554959785523,
+        "failure_rate": 0.0
+      },
+      "dblp_scholar": {
+        "n": 415.0,
+        "n_matchable": 385.0,
+        "n_certified_nomatch": 30.0,
+        "n_unresolved": 1.0,
+        "CM": 244.0,
+        "WC": 0,
+        "MM": 141.0,
+        "SM": 0,
+        "CR": 30.0,
+        "precision": 1.0,
+        "match_recall": 0.6337662337662338,
+        "n_fmr": 0.0,
+        "f05": 89.6399706098457,
+        "coverage_auto": 0.6602409638554216,
+        "coverage_match": 0.5879518072289157,
+        "coverage_none": 0.07228915662650602,
+        "false_none_rate": 0.04935064935064935,
+        "accepted_link_error": 0.0,
+        "accepted_link_precision": 1.0,
+        "auto_decision_error": 0.06484641638225255,
+        "escalation_rate": 0.0,
+        "defer_rate": 0.29397590361445786,
+        "failure_rate": 0.0
+      },
+      "walmart_amazon": {
+        "n": 166.0,
+        "n_matchable": 166.0,
+        "n_certified_nomatch": 0.0,
+        "n_unresolved": 3397.0,
+        "CM": 20.0,
+        "WC": 0,
+        "MM": 146.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": 1.0,
+        "match_recall": 0.12048192771084337,
+        "n_fmr": NaN,
+        "f05": 40.65040650406503,
+        "coverage_auto": 0.12048192771084337,
+        "coverage_match": 0.12048192771084337,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.3132530120481928,
+        "accepted_link_error": 0.0,
+        "accepted_link_precision": 1.0,
+        "auto_decision_error": 0.7222222222222222,
+        "escalation_rate": 0.0,
+        "defer_rate": 0.5662650602409639,
+        "failure_rate": 0.0
+      },
+      "wdc_products": {
+        "n": 183.0,
+        "n_matchable": 177.0,
+        "n_certified_nomatch": 6.0,
+        "n_unresolved": 0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 177.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": 0.0,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "__macro__": {
+        "macro_precision": 1.0,
+        "macro_match_recall": 0.2750231663746312,
+        "macro_n_fmr": 0.0,
+        "macro_f05": 67.61460264501936,
+        "macro_coverage_auto": 0.28164184889692817
+      }
+    },
+    "pairwise_clean_seed0": {
+      "abt_buy": {
+        "n": 373.0,
+        "n_matchable": 373.0,
+        "n_certified_nomatch": 0.0,
+        "n_unresolved": 0,
+        "CM": 94.0,
+        "WC": 0,
+        "MM": 279.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": 1.0,
+        "match_recall": 0.2520107238605898,
+        "n_fmr": NaN,
+        "f05": 62.75033377837117,
+        "coverage_auto": 0.2520107238605898,
+        "coverage_match": 0.2520107238605898,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": 0.0,
+        "accepted_link_precision": 1.0,
+        "auto_decision_error": 0.0,
+        "escalation_rate": 0.0,
+        "defer_rate": 0.7479892761394102,
+        "failure_rate": 0.0
+      },
+      "dblp_scholar": {
+        "n": 415.0,
+        "n_matchable": 385.0,
+        "n_certified_nomatch": 30.0,
+        "n_unresolved": 1.0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 385.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": 0.0,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "walmart_amazon": {
+        "n": 166.0,
+        "n_matchable": 166.0,
+        "n_certified_nomatch": 0.0,
+        "n_unresolved": 3397.0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 166.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": NaN,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "wdc_products": {
+        "n": 183.0,
+        "n_matchable": 177.0,
+        "n_certified_nomatch": 6.0,
+        "n_unresolved": 0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 177.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": 0.0,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "__macro__": {
+        "macro_precision": 1.0,
+        "macro_match_recall": 0.06300268096514745,
+        "macro_n_fmr": 0.0,
+        "macro_f05": 62.75033377837117,
+        "macro_coverage_auto": 0.06300268096514745
+      }
+    },
+    "set_joint_clean_seed0": {
+      "abt_buy": {
+        "n": 373.0,
+        "n_matchable": 373.0,
+        "n_certified_nomatch": 0.0,
+        "n_unresolved": 0,
+        "CM": 260.0,
+        "WC": 0,
+        "MM": 113.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": 1.0,
+        "match_recall": 0.6970509383378016,
+        "n_fmr": NaN,
+        "f05": 92.00283085633404,
+        "coverage_auto": 0.6970509383378016,
+        "coverage_match": 0.6970509383378016,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": 0.0,
+        "accepted_link_precision": 1.0,
+        "auto_decision_error": 0.0,
+        "escalation_rate": 0.0,
+        "defer_rate": 0.30294906166219837,
+        "failure_rate": 0.0
+      },
+      "dblp_scholar": {
+        "n": 415.0,
+        "n_matchable": 385.0,
+        "n_certified_nomatch": 30.0,
+        "n_unresolved": 1.0,
+        "CM": 282.0,
+        "WC": 0,
+        "MM": 103.0,
+        "SM": 0,
+        "CR": 29.0,
+        "precision": 1.0,
+        "match_recall": 0.7324675324675325,
+        "n_fmr": 0.0,
+        "f05": 93.19233311302048,
+        "coverage_auto": 0.7493975903614458,
+        "coverage_match": 0.6795180722891566,
+        "coverage_none": 0.06987951807228916,
+        "false_none_rate": 0.01038961038961039,
+        "accepted_link_error": 0.0,
+        "accepted_link_precision": 1.0,
+        "auto_decision_error": 0.012698412698412698,
+        "escalation_rate": 0.0,
+        "defer_rate": 0.24096385542168675,
+        "failure_rate": 0.0
+      },
+      "walmart_amazon": {
+        "n": 166.0,
+        "n_matchable": 166.0,
+        "n_certified_nomatch": 0.0,
+        "n_unresolved": 3397.0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 166.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": NaN,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "wdc_products": {
+        "n": 183.0,
+        "n_matchable": 177.0,
+        "n_certified_nomatch": 6.0,
+        "n_unresolved": 0,
+        "CM": 0,
+        "WC": 0,
+        "MM": 177.0,
+        "SM": 0,
+        "CR": 0,
+        "precision": NaN,
+        "match_recall": 0.0,
+        "n_fmr": 0.0,
+        "f05": NaN,
+        "coverage_auto": 0.0,
+        "coverage_match": 0.0,
+        "coverage_none": 0.0,
+        "false_none_rate": 0.0,
+        "accepted_link_error": NaN,
+        "accepted_link_precision": NaN,
+        "auto_decision_error": NaN,
+        "escalation_rate": 0.0,
+        "defer_rate": 1.0,
+        "failure_rate": 0.0
+      },
+      "__macro__": {
+        "macro_precision": 1.0,
+        "macro_match_recall": 0.35737961770133353,
+        "macro_n_fmr": 0.0,
+        "macro_f05": 92.59758198467726,
+        "macro_coverage_auto": 0.36161213217481186
+      }
+    }
+  },
+  "by_cohort": {},
+  "error_categories": {
+    "set_joint_interv_seed0": {},
+    "pairwise_clean_seed0": {},
+    "set_joint_clean_seed0": {}
+  },
+  "family_level_nfmr": {
+    "set_joint_interv_seed0": {
+      "dblp_scholar/natural": {
+        "n_negatives": 30,
+        "sm": 0,
+        "n_families": 29,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.09503385285530411,
+        "upper_bound_family": 0.0981446276772957,
+        "alpha": 0.05
+      },
+      "wdc_products/natural": {
+        "n_negatives": 6,
+        "sm": 0,
+        "n_families": 4,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.39303776899708265,
+        "upper_bound_family": 0.527129195498412,
+        "alpha": 0.05
+      }
+    },
+    "pairwise_clean_seed0": {
+      "dblp_scholar/natural": {
+        "n_negatives": 30,
+        "sm": 0,
+        "n_families": 29,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.09503385285530411,
+        "upper_bound_family": 0.0981446276772957,
+        "alpha": 0.05
+      },
+      "wdc_products/natural": {
+        "n_negatives": 6,
+        "sm": 0,
+        "n_families": 4,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.39303776899708265,
+        "upper_bound_family": 0.527129195498412,
+        "alpha": 0.05
+      }
+    },
+    "set_joint_clean_seed0": {
+      "dblp_scholar/natural": {
+        "n_negatives": 30,
+        "sm": 0,
+        "n_families": 29,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.09503385285530411,
+        "upper_bound_family": 0.0981446276772957,
+        "alpha": 0.05
+      },
+      "wdc_products/natural": {
+        "n_negatives": 6,
+        "sm": 0,
+        "n_families": 4,
+        "families_with_sm": 0,
+        "nfmr_family": 0.0,
+        "upper_bound_query": 0.39303776899708265,
+        "upper_bound_family": 0.527129195498412,
+        "alpha": 0.05
+      }
+    }
+  },
+  "bootstrap_ci": {
+    "set_joint_interv_seed0": {
+      "match_recall": {
+        "point": 0.3569482288828338,
+        "lo": 0.3217272481119372,
+        "hi": 0.39082759463754535,
+        "n_clusters": 4127
+      },
+      "precision": {
+        "point": 1.0,
+        "lo": 1.0,
+        "hi": 1.0,
+        "n_clusters": 4127
+      },
+      "n_fmr": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 4127
+      },
+      "f05": {
+        "point": 73.51290684624018,
+        "lo": 70.34106922707407,
+        "hi": 76.2349332259164,
+        "n_clusters": 4127
+      },
+      "coverage_auto": {
+        "point": 0.3720316622691293,
+        "lo": 0.3380267282911874,
+        "hi": 0.406340276680488,
+        "n_clusters": 4127
+      }
+    },
+    "pairwise_clean_seed0": {
+      "match_recall": {
+        "point": 0.08537693006357856,
+        "lo": 0.06521547764849969,
+        "hi": 0.10641895606028191,
+        "n_clusters": 4127
+      },
+      "precision": {
+        "point": 1.0,
+        "lo": 1.0,
+        "hi": 1.0,
+        "n_clusters": 4127
+      },
+      "n_fmr": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 4127
+      },
+      "f05": {
+        "point": 31.821259309410966,
+        "lo": 25.8614669620497,
+        "hi": 37.32228401811531,
+        "n_clusters": 4127
+      },
+      "coverage_auto": {
+        "point": 0.08267370272647317,
+        "lo": 0.06302511273276688,
+        "hi": 0.10257985257985257,
+        "n_clusters": 4127
+      }
+    },
+    "set_joint_clean_seed0": {
+      "match_recall": {
+        "point": 0.49227974568574023,
+        "lo": 0.4537296439641176,
+        "hi": 0.5313228729154117,
+        "n_clusters": 4127
+      },
+      "precision": {
+        "point": 1.0,
+        "lo": 1.0,
+        "hi": 1.0,
+        "n_clusters": 4127
+      },
+      "n_fmr": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "n_clusters": 4127
+      },
+      "f05": {
+        "point": 82.8999694096054,
+        "lo": 80.59374201579097,
+        "hi": 85.00373059646473,
+        "n_clusters": 4127
+      },
+      "coverage_auto": {
+        "point": 0.5021987686895338,
+        "lo": 0.46461012258992473,
+        "hi": 0.5396763335587121,
+        "n_clusters": 4127
+      }
+    }
+  },
+  "paired": {
+    "match_recall": {
+      "diff": 0.27157129881925524,
+      "lo": 0.24041014075275124,
+      "hi": 0.3033321408700417,
+      "n_pairs": 4535,
+      "n_clusters": 4127
+    },
+    "precision": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n_pairs": 4535,
+      "n_clusters": 4127
+    },
+    "n_fmr": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n_pairs": 4535,
+      "n_clusters": 4127
+    },
+    "f05": {
+      "diff": 41.69164753682922,
+      "lo": 36.699312575566154,
+      "hi": 47.28561927813349,
+      "n_pairs": 4535,
+      "n_clusters": 4127
+    },
+    "non_inferiority_recall": {
+      "margin": 0.01,
+      "lower_ci_of_diff": 0.24041014075275124,
+      "non_inferior": true
+    }
+  },
+  "thresholds": {
+    "set_joint_interv_seed0/walmart_amazon": {
+      "tau_select": 0.98,
+      "tau_none": 0.5,
+      "temperature": 1.5635332246575795,
+      "path": "runs/calib/set_joint_interv_seed0/policies/pooled_nfmr0.02.json"
+    },
+    "set_joint_interv_seed0/abt_buy": {
+      "tau_select": 0.98,
+      "tau_none": 0.5,
+      "temperature": 1.5362150264786236,
+      "path": "runs/calib/set_joint_interv_seed0/policies/abt_buy_nfmr0.02.json"
+    },
+    "set_joint_interv_seed0/dblp_scholar": {
+      "tau_select": 0.92,
+      "tau_none": 0.5,
+      "temperature": 1.6217972581648572,
+      "path": "runs/calib/set_joint_interv_seed0/policies/dblp_scholar_nfmr0.02.json"
+    },
+    "set_joint_interv_seed0/wdc_products": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.6370547819988133,
+      "path": "runs/calib/set_joint_interv_seed0/policies/wdc_products_nfmr0.02.json"
+    },
+    "pairwise_clean_seed0/walmart_amazon": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.569144249165903,
+      "path": "runs/calib/pairwise_clean_seed0/policies/pooled_nfmr0.02.json"
+    },
+    "pairwise_clean_seed0/abt_buy": {
+      "tau_select": 0.96,
+      "tau_none": 0.5,
+      "temperature": 2.3049839691065563,
+      "path": "runs/calib/pairwise_clean_seed0/policies/abt_buy_nfmr0.02.json"
+    },
+    "pairwise_clean_seed0/dblp_scholar": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.3221394828798918,
+      "path": "runs/calib/pairwise_clean_seed0/policies/dblp_scholar_nfmr0.02.json"
+    },
+    "pairwise_clean_seed0/wdc_products": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 2.380866020762153,
+      "path": "runs/calib/pairwise_clean_seed0/policies/wdc_products_nfmr0.02.json"
+    },
+    "set_joint_clean_seed0/walmart_amazon": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.8431001376020515,
+      "path": "runs/calib/set_joint_clean_seed0/policies/pooled_nfmr0.02.json"
+    },
+    "set_joint_clean_seed0/abt_buy": {
+      "tau_select": 0.76,
+      "tau_none": 0.5,
+      "temperature": 3.000129816082596,
+      "path": "runs/calib/set_joint_clean_seed0/policies/abt_buy_nfmr0.02.json"
+    },
+    "set_joint_clean_seed0/dblp_scholar": {
+      "tau_select": 0.98,
+      "tau_none": 0.5,
+      "temperature": 1.314436588335014,
+      "path": "runs/calib/set_joint_clean_seed0/policies/dblp_scholar_nfmr0.02.json"
+    },
+    "set_joint_clean_seed0/wdc_products": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 3.6404159833767746,
+      "path": "runs/calib/set_joint_clean_seed0/policies/wdc_products_nfmr0.02.json"
+    }
+  },
+  "n_instances": 4535
+}

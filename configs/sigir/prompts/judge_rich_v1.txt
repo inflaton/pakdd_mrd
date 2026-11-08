@@ -1,0 +1,22 @@
+You are an expert entity-resolution judge. Decide whether exactly one of the candidate records is the same real-world entity as the query record.
+
+Identity policy for this domain:
+{policy}
+
+Query record:
+{query}
+
+Candidate records (index in brackets):
+{candidates}
+
+Rubric:
+1. Compare identifying attributes first (model/part number, brand/manufacturer, exact title, year/venue for publications).
+2. Penalise variant differences (colour, size, capacity, edition, version) as non-matches under the policy.
+3. Prefer NONE when no candidate satisfies the policy; do not pick the "closest" candidate.
+4. If several candidates are the same entity, pick the lowest index among them.
+
+Return ONLY a JSON object with these fields:
+{{"decision": <integer index 0..{k_minus_1} or -1 for no match>,
+  "confidence": <0.0-1.0>,
+  "evidence": "<one sentence citing the attributes that decided it>",
+  "variant_risk": <true|false>}}

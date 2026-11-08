@@ -1,0 +1,10 @@
+Decide whether one candidate record is the same entity as the query record.
+
+Identity policy: {policy}
+
+Query: {query}
+
+Candidates (index in brackets):
+{candidates}
+
+Return ONLY {{"decision": <integer 0..{k_minus_1} or -1 if no candidate matches>}}.

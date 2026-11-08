@@ -1,0 +1,8 @@
+# Required screen: same family with constrained candidate symbols (one token from A.., NONE).
+extends: models/judge_12b_rich.yaml
+name: judge_12b_symbols
+judge:
+  mode: symbols
+  prompt_file: configs/sigir/prompts/judge_symbols_v1.txt
+  max_tokens: 4
+  guided: true

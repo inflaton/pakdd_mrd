@@ -1,0 +1,21 @@
+# Required arm: publicly available 12B rich-output judge served locally (vLLM or llama.cpp OpenAI-compatible server).
+# Gemma 4 12B (Nov 5, 2026): Gemma 3 12B is not cached on the Spark; plan §16 "whichever is served; pin the revision".
+# Served by env/serve_judge_vllm.sh (pinned image); snapshot 707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7. Thinking off.
+name: judge_12b_rich
+kind: llm_judge
+judge:
+  base_url: http://localhost:8000/v1
+  api_key: EMPTY
+  model: google/gemma-4-12B-it        # revision pinned by the cached snapshot (HF_HUB_OFFLINE); resolved name recorded
+  mode: rich
+  prompt_file: configs/sigir/prompts/judge_rich_v1.txt
+  serialization: rich_v1
+  temperature: 0.0
+  max_tokens: 512
+  timeout_s: 180
+  max_retries: 2
+  concurrency: 16
+  guided: false        # rich JSON is parsed; use guided_json only for minimal_json
+  seed: 0
+  extra_body:
+    chat_template_kwargs: {enable_thinking: false}

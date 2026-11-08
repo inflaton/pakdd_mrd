@@ -1,0 +1,7 @@
+# Candidate-set robustness (plan §8). Fixed diagnostic subset from dev (development) and test (final, frozen thresholds).
+name: robustness
+diagnostic_subset_size: 300        # per dataset, matchable and no-match mixed, entity-grouped
+n_permutations: 10
+counts: [5, 10, 20, 50]
+n_repeated_identical_requests: 3   # stochastic API variation (LLM judges only)
+seed: 0

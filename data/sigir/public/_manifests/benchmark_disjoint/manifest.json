@@ -1,0 +1,398 @@
+{
+  "version": "v1",
+  "benchmark_config": {
+    "version": "v1",
+    "k": 20,
+    "pool_size": 50,
+    "entity_disjoint_pools": true,
+    "splits": {
+      "seed": 20261101,
+      "fractions": {
+        "train": 0.55,
+        "dev": 0.1,
+        "calib_fit": 0.08,
+        "calib_confirm": 0.07,
+        "test": 0.15,
+        "transfer": 0.05
+      }
+    },
+    "retrieval": {
+      "retriever": "bm25",
+      "bm25": {
+        "k1": 1.2,
+        "b": 0.75
+      },
+      "dense_model": "BAAI/bge-small-en-v1.5",
+      "rrf": {
+        "k": 60
+      },
+      "second_config": {
+        "retriever": "hybrid"
+      }
+    },
+    "adjudications_dir": "data/sigir/public/annotations",
+    "out_dir": "data/sigir/public/benchmark"
+  },
+  "benchmark_config_hash": "4069318624cc6d6204a0fea20eba6dcba3ef2e1e656f761507a4467320ddd912",
+  "datasets": {
+    "walmart_amazon": {
+      "fields": [
+        "title",
+        "category",
+        "brand",
+        "modelno",
+        "price"
+      ],
+      "fields_b": [
+        "title",
+        "category",
+        "brand",
+        "modelno",
+        "price"
+      ],
+      "compact_fields": [
+        "title",
+        "brand",
+        "modelno"
+      ],
+      "identity_policy": "Two records match when they describe the same product model from the same brand. Different colour, capacity, pack size or model number variants are different products. Accessories or bundles containing the product are not the product.\n",
+      "link_completeness": "positives_complete",
+      "redistribution": "Magellan/DeepMatcher data; check pages.cs.wisc.edu/~anhai terms before redistribution.",
+      "n_instances": 24628,
+      "instances_hash": "ef0add05d1999e9c436433a56ad51da59bae66719da20f50080b8c410d5c46d1",
+      "snapshot_hashes": {
+        "A->B": "8fc518e0dfa06d587e7affcabc39e0416bf15acfd6457ba82fc044dd9c29cfa7",
+        "B->A": "892a3c160fe046489e16f498adb5b3d31032c3102eb2285861f247f1edfab526"
+      },
+      "snapshot_status": {
+        "A->B": "built",
+        "B->A": "built"
+      },
+      "split_seed": 20261101,
+      "exposed_groups": 1098,
+      "legacy_exposure": {
+        "file": "data/sigir/public/legacy/walmart-amazon-reservation.json",
+        "file_sha256": "24293d081158b9b9f4465c258b79b1d48bf2611445b0e8850aa0e734c835d208",
+        "exposed_splits": [
+          "test",
+          "dev"
+        ],
+        "id_offset": -1,
+        "by_split": {
+          "test": 1000,
+          "dev": 100,
+          "unused": 1454
+        },
+        "n_exposed_records": 1100,
+        "title_check": "2554/2554 titles match (alphanumeric, case-folded)",
+        "n_exposed_groups": 1098,
+        "exposed_group_partitions": {
+          "train": 910,
+          "dev": 188
+        }
+      },
+      "exposure_audit": {
+        "calib_confirm": {
+          "n": 1587,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 1013
+        },
+        "calib_fit": {
+          "n": 1813,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 1215
+        },
+        "test": {
+          "n": 3563,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 2278
+        },
+        "dev": {
+          "n": 2547,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 1758
+        },
+        "transfer": {
+          "n": 1205,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 767
+        },
+        "legacy_exposure": {
+          "file": "data/sigir/public/legacy/walmart-amazon-reservation.json",
+          "file_sha256": "24293d081158b9b9f4465c258b79b1d48bf2611445b0e8850aa0e734c835d208",
+          "exposed_splits": [
+            "test",
+            "dev"
+          ],
+          "id_offset": -1,
+          "by_split": {
+            "test": 1000,
+            "dev": 100,
+            "unused": 1454
+          },
+          "n_exposed_records": 1100,
+          "title_check": "2554/2554 titles match (alphanumeric, case-folded)",
+          "n_exposed_groups": 1098,
+          "exposed_group_partitions": {
+            "train": 910,
+            "dev": 188
+          }
+        }
+      },
+      "candidate_recall": {
+        "A->B": {
+          "n_matchable_queries": 852,
+          "recall@5": 0.9788732394366197,
+          "recall@10": 0.9894366197183099,
+          "recall@20": 0.9964788732394366,
+          "recall@50": 1.0
+        },
+        "B->A": {
+          "n_matchable_queries": 956,
+          "recall@5": 0.997907949790795,
+          "recall@10": 1.0,
+          "recall@20": 1.0,
+          "recall@50": 1.0
+        }
+      },
+      "adjudicated_pools": 0
+    },
+    "abt_buy": {
+      "fields": [
+        "name",
+        "description",
+        "price"
+      ],
+      "fields_b": [
+        "name",
+        "description",
+        "manufacturer",
+        "price"
+      ],
+      "compact_fields": [
+        "name",
+        "manufacturer"
+      ],
+      "identity_policy": "Two records match when they are the same product model (same manufacturer part/model). Variants that differ in colour, size or bundle are different products.\n",
+      "link_completeness": "complete",
+      "redistribution": "Leipzig DB group benchmark; cite the maintainers; check terms.",
+      "n_instances": 2173,
+      "instances_hash": "6bfd0f689dfbd506098c47143fb7be8a927ecca1a253e38ff757630ec34cff3a",
+      "snapshot_hashes": {
+        "A->B": "6b15da8e73587167667c2b2210360233a4c4a09858c4b91608e88bc7bab2a352",
+        "B->A": "756dd568944a3c16ff4276ff5fb87f75019a397b604a951aa068e4124871774b"
+      },
+      "snapshot_status": {
+        "A->B": "built",
+        "B->A": "built"
+      },
+      "split_seed": 20261101,
+      "exposed_groups": 0,
+      "legacy_exposure": null,
+      "exposure_audit": {
+        "test": {
+          "n": 373,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 373
+        },
+        "calib_fit": {
+          "n": 170,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 170
+        },
+        "dev": {
+          "n": 192,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 192
+        },
+        "calib_confirm": {
+          "n": 156,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 156
+        },
+        "transfer": {
+          "n": 75,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 75
+        }
+      },
+      "candidate_recall": {
+        "A->B": {
+          "n_matchable_queries": 1081,
+          "recall@5": 0.9222941720629048,
+          "recall@10": 0.969472710453284,
+          "recall@20": 0.9879740980573543,
+          "recall@50": 0.996299722479186
+        },
+        "B->A": {
+          "n_matchable_queries": 1092,
+          "recall@5": 0.9313186813186813,
+          "recall@10": 0.9633699633699634,
+          "recall@20": 0.9853479853479854,
+          "recall@50": 0.9981684981684982
+        }
+      },
+      "adjudicated_pools": 0
+    },
+    "dblp_scholar": {
+      "fields": [
+        "title",
+        "authors",
+        "venue",
+        "year"
+      ],
+      "fields_b": [
+        "title",
+        "authors",
+        "venue",
+        "year"
+      ],
+      "compact_fields": [
+        "title",
+        "year"
+      ],
+      "identity_policy": "Two records match when they refer to the same publication. Google Scholar often holds several records for one publication, including citation entries with shortened, misspelt or run-together titles, abbreviated author lists, or a missing venue or year; every such record matches. A preprint, a conference paper and an extended journal version are different publications, but a Scholar record that does not distinguish them may match either.\n",
+      "link_completeness": "complete",
+      "redistribution": "Leipzig DB group benchmark; cite the maintainers; check terms.",
+      "n_instances": 2616,
+      "instances_hash": "cc3c5227179f30c6fe56f1f3f09f07d16cc298493917f92831b6fa57b17ef801",
+      "snapshot_hashes": {
+        "A->B": "e5888f74b047df972d1bf56bb3dc16d2c1002c4b3fdf3f6da2d0e35e575d4e9d"
+      },
+      "snapshot_status": {
+        "A->B": "built"
+      },
+      "split_seed": 20261101,
+      "exposed_groups": 0,
+      "legacy_exposure": null,
+      "exposure_audit": {
+        "calib_fit": {
+          "n": 209,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 171
+        },
+        "test": {
+          "n": 416,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 340
+        },
+        "calib_confirm": {
+          "n": 198,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 152
+        },
+        "transfer": {
+          "n": 121,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 95
+        },
+        "dev": {
+          "n": 267,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 216
+        }
+      },
+      "candidate_recall": {
+        "A->B": {
+          "n_matchable_queries": 2408,
+          "recall@5": 0.9966777408637874,
+          "recall@10": 0.9975083056478405,
+          "recall@20": 0.9987541528239202,
+          "recall@50": 0.9995847176079734
+        }
+      },
+      "adjudicated_pools": 0
+    },
+    "wdc_products": {
+      "fields": [
+        "title",
+        "description",
+        "brand",
+        "price",
+        "priceCurrency"
+      ],
+      "fields_b": [
+        "title",
+        "description",
+        "brand",
+        "price",
+        "priceCurrency"
+      ],
+      "compact_fields": [
+        "title",
+        "brand"
+      ],
+      "identity_policy": "Two offers match when they are the same product (same manufacturer product id / model) as defined by the WDC product cluster. Different variants (size, colour, capacity) are different products.\n",
+      "link_completeness": "cluster",
+      "redistribution": "WDC Products (CC-BY style web data); cite WDC; check terms.",
+      "n_instances": 1470,
+      "instances_hash": "fd3117514cfa009a49a8db175c4622381e484c7cfa41ad325e64514e741a0ceb",
+      "snapshot_hashes": {
+        "A->B": "5ec8f3eb33824ed0f2f40e1623b26ff020ebf5a64a0b1f95f1d8b9b0ac49d147"
+      },
+      "snapshot_status": {
+        "A->B": "built"
+      },
+      "split_seed": 20261101,
+      "exposed_groups": 0,
+      "legacy_exposure": null,
+      "exposure_audit": {
+        "calib_confirm": {
+          "n": 99,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 99
+        },
+        "dev": {
+          "n": 161,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 149
+        },
+        "test": {
+          "n": 183,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 183
+        },
+        "calib_fit": {
+          "n": 138,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 133
+        },
+        "transfer": {
+          "n": 61,
+          "target_entity_in_train": 0,
+          "pools_with_train_entity_distractors": 0,
+          "targets_seen_as_train_distractors": 61
+        }
+      },
+      "candidate_recall": {
+        "A->B": {
+          "n_matchable_queries": 1440,
+          "recall@5": 0.8625,
+          "recall@10": 0.9506944444444444,
+          "recall@20": 0.9708333333333333,
+          "recall@50": 0.9847222222222223
+        }
+      },
+      "adjudicated_pools": 0
+    }
+  }
+}
