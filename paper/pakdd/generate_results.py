@@ -25,6 +25,10 @@ JUDGES = (
     ("judge_12b_symbols", "Gemma 4 12B", "Constrained symbols"),
 )
 PRIMARY_RUN = "20261107T130412Z_test_compare_b0.02_test_0886bf"
+BUDGET_RUNS = {
+    0.01: "20261107T130333Z_test_compare_b0.01_test_c332fc",
+    0.05: "20261107T130452Z_test_compare_b0.05_test_8baef7",
+}
 CONTRAST_RUNS = {
     "pairwise_interv_seed0": "20261107T130613Z_test_pair_set_joint_interv_seed0_vs_pairwise_interv_seed0_test_5317e3",
     "set_joint_clean_seed0": "20261107T130634Z_test_pair_set_joint_interv_seed0_vs_set_joint_clean_seed0_test_618fb8",
@@ -219,6 +223,38 @@ def build_tables(runs_dir):
     ):
         raise ValueError("Expected each previously failed source fit to qualify only above the frozen ceiling")
     source_fit_recalls = [row["best"]["recall"] for row in failed_source_fits]
+
+    # What limits linking: tau_none only splits unlinked pools between NONE and DEFER (the coverage tie-break sets it to
+    # the grid minimum wherever a scope links); the 5% target reproduces every 2% policy; one grid step looser fails
+    # the precision floor in every scope that has candidates above the cutoff.
+    def arm_thresholds(run, arm):
+        return {key.split("/")[1]: (row["tau_select"], row["tau_none"]) for key, row in run["thresholds"].items()
+                if key.split("/")[0] == arm}
+
+    budget_runs = {budget: evaluation(run_id) for budget, run_id in BUDGET_RUNS.items()}
+    if any(run["budget"] != budget or run["cohorts"] != primary["cohorts"] for budget, run in budget_runs.items()):
+        raise ValueError("Expected the locked 1% and 5% evaluations with both test cohorts")
+    primary_thresholds = {arm: arm_thresholds(primary, arm) for arm, *_ in ARMS}
+    if any(tau_none != 0.5 for scopes in primary_thresholds.values() for tau_select, tau_none in scopes.values()
+           if tau_select <= 1):
+        raise ValueError("Expected tau_none at the grid minimum in every scope that links")
+    if any(arm_thresholds(budget_runs[0.05], arm) != primary_thresholds[arm] for arm, *_ in ARMS):
+        raise ValueError("Expected the 5% policies to equal the 2% policies for the four arms")
+    if [arm for arm, *_ in ARMS if arm_thresholds(budget_runs[0.01], arm) != primary_thresholds[arm]] != ["set_joint_clean_seed0"]:
+        raise ValueError("Expected the 1% target to change only the clean set policies")
+    probes = []
+    for arm, *_ in ARMS:
+        for scope, row in fit_replay["binding"][arm.removesuffix("_seed0")].items():
+            locked = primary["thresholds"][f"{arm}/{'walmart_amazon' if scope == 'pooled' else scope}"]["tau_select"]
+            if row["frozen_tau_select"] != locked:
+                raise ValueError(f"Fit probe policy differs from the locked policy for {arm}/{scope}")
+            probes.append(row["looser"])
+    if len(probes) != 4 * len(ARMS) or any(row is None for row in probes):
+        raise ValueError("Expected a looser grid probe for every scope of the four arms")
+    precision_fails = sum(row["accepted"] > 0 and row["precision"] < fit_replay["precision_floor"] for row in probes)
+    no_link_probes = sum(row["accepted"] == 0 for row in probes)
+    if precision_fails + no_link_probes != len(probes) or max(row["nfmr"] for row in probes) > 0.05:
+        raise ValueError("Expected every looser probe to fail the precision floor or link nothing, with N-FMR <= 5%")
     def comparison(control):
         return evaluation(CONTRAST_RUNS[control])["paired"]
 
@@ -395,6 +431,8 @@ def build_tables(runs_dir):
         "GroupedConfirmCorrect": grouped["correct"], "GroupedConfirmMatchable": grouped["matchable"],
         "BackfillChangedRelativeScores": backfill["relative_score_shifts"],
         "BackfillChangedRanks": backfill["rank_shifts"],
+        "BindingScopes": len(probes), "BindingPrecisionFails": precision_fails, "BindingNoLinks": no_link_probes,
+        "BindingNfmrFails": sum(row["nfmr"] > fit_replay["budget"] for row in probes),
     })
     define_rates({
         "DblpFamilyUpper": main_family["upper_bound_family"],
@@ -424,6 +462,7 @@ def build_tables(runs_dir):
         "DisjointCleanSetRecall": disjoint_natural["set_joint_clean_seed0"]["match_recall"],
         "DisjointSetPrecision": disjoint["results"][SET_ARM]["precision"],
         "DisjointCleanSetPrecision": disjoint["results"]["set_joint_clean_seed0"]["precision"],
+        "BindingMaxNfmr": max(row["nfmr"] for row in probes),
     })
     macros.update({
         "TopOneRange": rf"{percent(min(top_one.values()))}--{percent(max(top_one.values()))}\%",

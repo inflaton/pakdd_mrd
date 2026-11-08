@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Replay the frozen selection grid and exact score breakpoints on fit pools only."""
+"""Replay the frozen selection grid and exact score breakpoints on fit pools only, and probe one grid step past each
+frozen select threshold."""
 
 import argparse
 import json
@@ -21,7 +22,9 @@ WDC_ARMS = ("pairwise_clean", "pairwise_interv", "set_joint_clean", "set_joint_i
 TRANSFER_ARMS = ("pairwise_clean", "set_joint_interv")
 
 
-def replay(pools, prediction_path, policy_path):
+def replay(pools, prediction_path, policy_path, probe=False):
+    """With `probe`, also return the fit metrics at the frozen select threshold and one grid step looser (the grid
+    ceiling for a scope that defers throughout), which shows the constraint that stops the fit from linking more."""
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     decisions = read_decisions(prediction_path)
     temperature = policy["temperature"]
@@ -97,7 +100,7 @@ def replay(pools, prediction_path, policy_path):
     in_range = [row for row in qualifying if lower <= row["threshold"] <= upper]
     in_range.extend(row for row in (grid[0], grid[-1]) if qualifies(row))
     best_in_range = max(in_range, key=lambda row: row["correct"], default=None)
-    return {
+    result = {
         "n_matchable": n_matchable,
         "n_negative": n_negative,
         "temperature": temperature,
@@ -106,6 +109,14 @@ def replay(pools, prediction_path, policy_path):
         "best": best,
         "best_in_range": best_in_range,
     }
+    if probe:
+        if policy["tau_select"] > upper:
+            looser = grid[-1]
+        else:
+            step = [abs(row["threshold"] - policy["tau_select"]) < 1e-9 for row in grid].index(True)
+            looser = grid[step - 1] if step else None
+        result.update(frozen=frozen, looser=looser)
+    return result
 
 
 def main():
@@ -124,6 +135,7 @@ def main():
         "precision_floor": 0.98,
         "wdc": {},
         "transfer": {},
+        "binding": {},
     }
     for arm in WDC_ARMS:
         name = f"{arm}_seed0"
@@ -142,6 +154,15 @@ def main():
             summary["transfer"][target][arm] = replay(
                 source, runs / "preds_lodo" / f"{name}.jsonl.gz", policies[0],
             )
+    # Which constraint stops each seed-0 policy scope from linking more on calibration fit (pooled = all datasets).
+    scopes = {"pooled": pools} | {dataset: [pool for pool in pools if pool.dataset == dataset] for dataset in DATASETS}
+    for arm in WDC_ARMS:
+        name = f"{arm}_seed0"
+        summary["binding"][arm] = {}
+        for scope, members in scopes.items():
+            policy = runs / "calib" / name / f"policies/{scope}_nfmr0.02.json"
+            if policy.exists():
+                summary["binding"][arm][scope] = replay(members, runs / "preds" / f"{name}.jsonl.gz", policy, probe=True)
     encoded = json.dumps(summary, indent=2, allow_nan=False) + "\n"
     if args.output:
         args.output.write_text(encoded, encoding="utf-8")

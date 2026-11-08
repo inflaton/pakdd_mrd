@@ -1,0 +1,106 @@
+{
+  "partition": "test",
+  "budget": 0.01,
+  "cohorts": [
+    "natural",
+    "constructed"
+  ],
+  "thresholds": {
+    "pairwise_clean_seed0/walmart_amazon": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.569144249165903,
+      "path": "runs/calib/pairwise_clean_seed0/policies/pooled_nfmr0.01.json"
+    },
+    "pairwise_clean_seed0/abt_buy": {
+      "tau_select": 0.96,
+      "tau_none": 0.5,
+      "temperature": 2.3049839691065563,
+      "path": "runs/calib/pairwise_clean_seed0/policies/abt_buy_nfmr0.01.json"
+    },
+    "pairwise_clean_seed0/dblp_scholar": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.3221394828798918,
+      "path": "runs/calib/pairwise_clean_seed0/policies/dblp_scholar_nfmr0.01.json"
+    },
+    "pairwise_clean_seed0/wdc_products": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 2.380866020762153,
+      "path": "runs/calib/pairwise_clean_seed0/policies/wdc_products_nfmr0.01.json"
+    },
+    "pairwise_interv_seed0/walmart_amazon": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.4191665640025644,
+      "path": "runs/calib/pairwise_interv_seed0/policies/pooled_nfmr0.01.json"
+    },
+    "pairwise_interv_seed0/abt_buy": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.5081422864038774,
+      "path": "runs/calib/pairwise_interv_seed0/policies/abt_buy_nfmr0.01.json"
+    },
+    "pairwise_interv_seed0/dblp_scholar": {
+      "tau_select": 0.52,
+      "tau_none": 0.5,
+      "temperature": 1.6563610051294937,
+      "path": "runs/calib/pairwise_interv_seed0/policies/dblp_scholar_nfmr0.01.json"
+    },
+    "pairwise_interv_seed0/wdc_products": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.429590252747536,
+      "path": "runs/calib/pairwise_interv_seed0/policies/wdc_products_nfmr0.01.json"
+    },
+    "set_joint_clean_seed0/walmart_amazon": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.8431001376020515,
+      "path": "runs/calib/set_joint_clean_seed0/policies/pooled_nfmr0.01.json"
+    },
+    "set_joint_clean_seed0/abt_buy": {
+      "tau_select": 0.82,
+      "tau_none": 0.5,
+      "temperature": 3.000129816082596,
+      "path": "runs/calib/set_joint_clean_seed0/policies/abt_buy_nfmr0.01.json"
+    },
+    "set_joint_clean_seed0/dblp_scholar": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.314436588335014,
+      "path": "runs/calib/set_joint_clean_seed0/policies/dblp_scholar_nfmr0.01.json"
+    },
+    "set_joint_clean_seed0/wdc_products": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 3.6404159833767746,
+      "path": "runs/calib/set_joint_clean_seed0/policies/wdc_products_nfmr0.01.json"
+    },
+    "set_joint_interv_seed0/walmart_amazon": {
+      "tau_select": 0.98,
+      "tau_none": 0.5,
+      "temperature": 1.5635332246575795,
+      "path": "runs/calib/set_joint_interv_seed0/policies/pooled_nfmr0.01.json"
+    },
+    "set_joint_interv_seed0/abt_buy": {
+      "tau_select": 0.98,
+      "tau_none": 0.5,
+      "temperature": 1.5362150264786236,
+      "path": "runs/calib/set_joint_interv_seed0/policies/abt_buy_nfmr0.01.json"
+    },
+    "set_joint_interv_seed0/dblp_scholar": {
+      "tau_select": 0.92,
+      "tau_none": 0.5,
+      "temperature": 1.6217972581648572,
+      "path": "runs/calib/set_joint_interv_seed0/policies/dblp_scholar_nfmr0.01.json"
+    },
+    "set_joint_interv_seed0/wdc_products": {
+      "tau_select": 1.1,
+      "tau_none": 1.1,
+      "temperature": 1.6370547819988133,
+      "path": "runs/calib/set_joint_interv_seed0/policies/wdc_products_nfmr0.01.json"
+    }
+  }
+}

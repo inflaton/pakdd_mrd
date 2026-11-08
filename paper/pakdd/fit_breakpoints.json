@@ -233,5 +233,647 @@
         }
       }
     }
+  },
+  "binding": {
+    "pairwise_clean": {
+      "pooled": {
+        "n_matchable": 545,
+        "n_negative": 517,
+        "temperature": 1.569144249165903,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9421768707482994,
+        "best": {
+          "threshold": 0.9991112692292633,
+          "accepted": 86,
+          "correct": 85,
+          "spurious": 1,
+          "recall": 0.1559633027522936,
+          "precision": 0.9883720930232558,
+          "nfmr": 0.0019342359767891683
+        },
+        "best_in_range": null,
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 251,
+          "correct": 236,
+          "spurious": 15,
+          "recall": 0.43302752293577984,
+          "precision": 0.9402390438247012,
+          "nfmr": 0.029013539651837523
+        }
+      },
+      "abt_buy": {
+        "n_matchable": 166,
+        "n_negative": 170,
+        "temperature": 2.3049839691065563,
+        "frozen_tau_select": 0.96,
+        "grid_max_precision": 1.0,
+        "best": {
+          "threshold": 0.9566232460265485,
+          "accepted": 40,
+          "correct": 40,
+          "spurious": 0,
+          "recall": 0.24096385542168675,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "best_in_range": {
+          "threshold": 0.9566232460265485,
+          "accepted": 40,
+          "correct": 40,
+          "spurious": 0,
+          "recall": 0.24096385542168675,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "frozen": {
+          "threshold": 0.96,
+          "accepted": 37,
+          "correct": 37,
+          "spurious": 0,
+          "recall": 0.22289156626506024,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.94,
+          "accepted": 54,
+          "correct": 52,
+          "spurious": 2,
+          "recall": 0.3132530120481928,
+          "precision": 0.9629629629629629,
+          "nfmr": 0.011764705882352941
+        }
+      },
+      "dblp_scholar": {
+        "n_matchable": 195,
+        "n_negative": 209,
+        "temperature": 1.3221394828798918,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9694656488549618,
+        "best": {
+          "threshold": 0.9975110551350226,
+          "accepted": 106,
+          "correct": 104,
+          "spurious": 2,
+          "recall": 0.5333333333333333,
+          "precision": 0.9811320754716981,
+          "nfmr": 0.009569377990430622
+        },
+        "best_in_range": null,
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 131,
+          "correct": 127,
+          "spurious": 4,
+          "recall": 0.6512820512820513,
+          "precision": 0.9694656488549618,
+          "nfmr": 0.019138755980861243
+        }
+      },
+      "wdc_products": {
+        "n_matchable": 132,
+        "n_negative": 138,
+        "temperature": 2.380866020762153,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.8356164383561644,
+        "best": {
+          "threshold": 0.9911830662392712,
+          "accepted": 2,
+          "correct": 2,
+          "spurious": 0,
+          "recall": 0.015151515151515152,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "best_in_range": null,
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 5,
+          "correct": 4,
+          "spurious": 1,
+          "recall": 0.030303030303030304,
+          "precision": 0.8,
+          "nfmr": 0.007246376811594203
+        }
+      }
+    },
+    "pairwise_interv": {
+      "pooled": {
+        "n_matchable": 545,
+        "n_negative": 517,
+        "temperature": 1.4191665640025644,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.9631147540983607,
+        "best": {
+          "threshold": 0.9918898697947972,
+          "accepted": 208,
+          "correct": 204,
+          "spurious": 4,
+          "recall": 0.3743119266055046,
+          "precision": 0.9807692307692307,
+          "nfmr": 0.007736943907156673
+        },
+        "best_in_range": null,
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 244,
+          "correct": 235,
+          "spurious": 9,
+          "recall": 0.43119266055045874,
+          "precision": 0.9631147540983607,
+          "nfmr": 0.017408123791102514
+        }
+      },
+      "abt_buy": {
+        "n_matchable": 166,
+        "n_negative": 170,
+        "temperature": 1.5081422864038774,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.979381443298969,
+        "best": {
+          "threshold": 0.9783466214520093,
+          "accepted": 101,
+          "correct": 99,
+          "spurious": 2,
+          "recall": 0.5963855421686747,
+          "precision": 0.9801980198019802,
+          "nfmr": 0.011764705882352941
+        },
+        "best_in_range": {
+          "threshold": 0.9783466214520093,
+          "accepted": 101,
+          "correct": 99,
+          "spurious": 2,
+          "recall": 0.5963855421686747,
+          "precision": 0.9801980198019802,
+          "nfmr": 0.011764705882352941
+        },
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 97,
+          "correct": 95,
+          "spurious": 2,
+          "recall": 0.572289156626506,
+          "precision": 0.979381443298969,
+          "nfmr": 0.011764705882352941
+        }
+      },
+      "dblp_scholar": {
+        "n_matchable": 195,
+        "n_negative": 209,
+        "temperature": 1.6563610051294937,
+        "frozen_tau_select": 0.52,
+        "grid_max_precision": 1.0,
+        "best": {
+          "threshold": 0.512595568705747,
+          "accepted": 164,
+          "correct": 161,
+          "spurious": 2,
+          "recall": 0.8256410256410256,
+          "precision": 0.9817073170731707,
+          "nfmr": 0.009569377990430622
+        },
+        "best_in_range": {
+          "threshold": 0.512595568705747,
+          "accepted": 164,
+          "correct": 161,
+          "spurious": 2,
+          "recall": 0.8256410256410256,
+          "precision": 0.9817073170731707,
+          "nfmr": 0.009569377990430622
+        },
+        "frozen": {
+          "threshold": 0.52,
+          "accepted": 163,
+          "correct": 160,
+          "spurious": 2,
+          "recall": 0.8205128205128205,
+          "precision": 0.9815950920245399,
+          "nfmr": 0.009569377990430622
+        },
+        "looser": {
+          "threshold": 0.5,
+          "accepted": 165,
+          "correct": 161,
+          "spurious": 3,
+          "recall": 0.8256410256410256,
+          "precision": 0.9757575757575757,
+          "nfmr": 0.014354066985645933
+        }
+      },
+      "wdc_products": {
+        "n_matchable": 132,
+        "n_negative": 138,
+        "temperature": 1.429590252747536,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.8297872340425532,
+        "best": {
+          "threshold": 0.9986677720818629,
+          "accepted": 4,
+          "correct": 4,
+          "spurious": 0,
+          "recall": 0.030303030303030304,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "best_in_range": null,
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 14,
+          "correct": 9,
+          "spurious": 5,
+          "recall": 0.06818181818181818,
+          "precision": 0.6428571428571429,
+          "nfmr": 0.036231884057971016
+        }
+      }
+    },
+    "set_joint_clean": {
+      "pooled": {
+        "n_matchable": 545,
+        "n_negative": 517,
+        "temperature": 1.8431001376020515,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.975177304964539,
+        "best": {
+          "threshold": 0.9939312817738949,
+          "accepted": 217,
+          "correct": 213,
+          "spurious": 4,
+          "recall": 0.3908256880733945,
+          "precision": 0.9815668202764977,
+          "nfmr": 0.007736943907156673
+        },
+        "best_in_range": null,
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 282,
+          "correct": 275,
+          "spurious": 7,
+          "recall": 0.5045871559633027,
+          "precision": 0.975177304964539,
+          "nfmr": 0.013539651837524178
+        }
+      },
+      "abt_buy": {
+        "n_matchable": 166,
+        "n_negative": 170,
+        "temperature": 3.000129816082596,
+        "frozen_tau_select": 0.76,
+        "grid_max_precision": 1.0,
+        "best": {
+          "threshold": 0.7589340075662521,
+          "accepted": 116,
+          "correct": 114,
+          "spurious": 2,
+          "recall": 0.6867469879518072,
+          "precision": 0.9827586206896551,
+          "nfmr": 0.011764705882352941
+        },
+        "best_in_range": {
+          "threshold": 0.7589340075662521,
+          "accepted": 116,
+          "correct": 114,
+          "spurious": 2,
+          "recall": 0.6867469879518072,
+          "precision": 0.9827586206896551,
+          "nfmr": 0.011764705882352941
+        },
+        "frozen": {
+          "threshold": 0.76,
+          "accepted": 115,
+          "correct": 113,
+          "spurious": 2,
+          "recall": 0.6807228915662651,
+          "precision": 0.9826086956521739,
+          "nfmr": 0.011764705882352941
+        },
+        "looser": {
+          "threshold": 0.74,
+          "accepted": 119,
+          "correct": 116,
+          "spurious": 3,
+          "recall": 0.6987951807228916,
+          "precision": 0.9747899159663865,
+          "nfmr": 0.01764705882352941
+        }
+      },
+      "dblp_scholar": {
+        "n_matchable": 195,
+        "n_negative": 209,
+        "temperature": 1.314436588335014,
+        "frozen_tau_select": 0.98,
+        "grid_max_precision": 0.9801324503311258,
+        "best": {
+          "threshold": 0.9752715735997937,
+          "accepted": 152,
+          "correct": 149,
+          "spurious": 3,
+          "recall": 0.764102564102564,
+          "precision": 0.9802631578947368,
+          "nfmr": 0.014354066985645933
+        },
+        "best_in_range": {
+          "threshold": 0.9752715735997937,
+          "accepted": 152,
+          "correct": 149,
+          "spurious": 3,
+          "recall": 0.764102564102564,
+          "precision": 0.9802631578947368,
+          "nfmr": 0.014354066985645933
+        },
+        "frozen": {
+          "threshold": 0.98,
+          "accepted": 151,
+          "correct": 148,
+          "spurious": 3,
+          "recall": 0.7589743589743589,
+          "precision": 0.9801324503311258,
+          "nfmr": 0.014354066985645933
+        },
+        "looser": {
+          "threshold": 0.96,
+          "accepted": 159,
+          "correct": 155,
+          "spurious": 4,
+          "recall": 0.7948717948717948,
+          "precision": 0.9748427672955975,
+          "nfmr": 0.019138755980861243
+        }
+      },
+      "wdc_products": {
+        "n_matchable": 132,
+        "n_negative": 138,
+        "temperature": 3.6404159833767746,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.85,
+        "best": {
+          "threshold": 0.9383533482755329,
+          "accepted": 1,
+          "correct": 1,
+          "spurious": 0,
+          "recall": 0.007575757575757576,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "best_in_range": {
+          "threshold": 0.9383533482755329,
+          "accepted": 1,
+          "correct": 1,
+          "spurious": 0,
+          "recall": 0.007575757575757576,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        }
+      }
+    },
+    "set_joint_interv": {
+      "pooled": {
+        "n_matchable": 545,
+        "n_negative": 517,
+        "temperature": 1.5635332246575795,
+        "frozen_tau_select": 0.98,
+        "grid_max_precision": 0.98,
+        "best": {
+          "threshold": 0.9767965690338654,
+          "accepted": 210,
+          "correct": 206,
+          "spurious": 4,
+          "recall": 0.3779816513761468,
+          "precision": 0.9809523809523809,
+          "nfmr": 0.007736943907156673
+        },
+        "best_in_range": {
+          "threshold": 0.9767965690338654,
+          "accepted": 210,
+          "correct": 206,
+          "spurious": 4,
+          "recall": 0.3779816513761468,
+          "precision": 0.9809523809523809,
+          "nfmr": 0.007736943907156673
+        },
+        "frozen": {
+          "threshold": 0.98,
+          "accepted": 200,
+          "correct": 196,
+          "spurious": 4,
+          "recall": 0.3596330275229358,
+          "precision": 0.98,
+          "nfmr": 0.007736943907156673
+        },
+        "looser": {
+          "threshold": 0.96,
+          "accepted": 261,
+          "correct": 251,
+          "spurious": 10,
+          "recall": 0.46055045871559636,
+          "precision": 0.9616858237547893,
+          "nfmr": 0.019342359767891684
+        }
+      },
+      "abt_buy": {
+        "n_matchable": 166,
+        "n_negative": 170,
+        "temperature": 1.5362150264786236,
+        "frozen_tau_select": 0.98,
+        "grid_max_precision": 0.9848484848484849,
+        "best": {
+          "threshold": 0.9790248837396328,
+          "accepted": 68,
+          "correct": 67,
+          "spurious": 1,
+          "recall": 0.4036144578313253,
+          "precision": 0.9852941176470589,
+          "nfmr": 0.0058823529411764705
+        },
+        "best_in_range": {
+          "threshold": 0.9790248837396328,
+          "accepted": 68,
+          "correct": 67,
+          "spurious": 1,
+          "recall": 0.4036144578313253,
+          "precision": 0.9852941176470589,
+          "nfmr": 0.0058823529411764705
+        },
+        "frozen": {
+          "threshold": 0.98,
+          "accepted": 66,
+          "correct": 65,
+          "spurious": 1,
+          "recall": 0.39156626506024095,
+          "precision": 0.9848484848484849,
+          "nfmr": 0.0058823529411764705
+        },
+        "looser": {
+          "threshold": 0.96,
+          "accepted": 93,
+          "correct": 90,
+          "spurious": 3,
+          "recall": 0.5421686746987951,
+          "precision": 0.967741935483871,
+          "nfmr": 0.01764705882352941
+        }
+      },
+      "dblp_scholar": {
+        "n_matchable": 195,
+        "n_negative": 209,
+        "temperature": 1.6217972581648572,
+        "frozen_tau_select": 0.92,
+        "grid_max_precision": 1.0,
+        "best": {
+          "threshold": 0.8571262990767242,
+          "accepted": 150,
+          "correct": 147,
+          "spurious": 3,
+          "recall": 0.7538461538461538,
+          "precision": 0.98,
+          "nfmr": 0.014354066985645933
+        },
+        "best_in_range": {
+          "threshold": 0.8571262990767242,
+          "accepted": 150,
+          "correct": 147,
+          "spurious": 3,
+          "recall": 0.7538461538461538,
+          "precision": 0.98,
+          "nfmr": 0.014354066985645933
+        },
+        "frozen": {
+          "threshold": 0.92,
+          "accepted": 136,
+          "correct": 135,
+          "spurious": 1,
+          "recall": 0.6923076923076923,
+          "precision": 0.9926470588235294,
+          "nfmr": 0.004784688995215311
+        },
+        "looser": {
+          "threshold": 0.9,
+          "accepted": 143,
+          "correct": 140,
+          "spurious": 3,
+          "recall": 0.717948717948718,
+          "precision": 0.9790209790209791,
+          "nfmr": 0.014354066985645933
+        }
+      },
+      "wdc_products": {
+        "n_matchable": 132,
+        "n_negative": 138,
+        "temperature": 1.6370547819988133,
+        "frozen_tau_select": 1.1,
+        "grid_max_precision": 0.7230769230769231,
+        "best": {
+          "threshold": 0.9934556489492464,
+          "accepted": 4,
+          "correct": 4,
+          "spurious": 0,
+          "recall": 0.030303030303030304,
+          "precision": 1.0,
+          "nfmr": 0.0
+        },
+        "best_in_range": null,
+        "frozen": {
+          "threshold": 1.1,
+          "accepted": 0,
+          "correct": 0,
+          "spurious": 0,
+          "recall": 0.0,
+          "precision": null,
+          "nfmr": 0.0
+        },
+        "looser": {
+          "threshold": 0.98,
+          "accepted": 7,
+          "correct": 5,
+          "spurious": 2,
+          "recall": 0.03787878787878788,
+          "precision": 0.7142857142857143,
+          "nfmr": 0.014492753623188406
+        }
+      }
+    }
   }
 }
